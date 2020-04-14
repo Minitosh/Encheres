@@ -116,7 +116,7 @@ public class Utilisateur implements Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString();
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", credit=" + credit + ", administrateur=" + administrateur +"]";
 	}
 	
 	
