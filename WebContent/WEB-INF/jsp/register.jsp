@@ -9,7 +9,7 @@
 <body>
 <script src="./assets/js/Register.js"></script>
 	<h1> Mon profil</h1>
-	<form id="accountInfoRegister" name="accountInfoRegister">
+	<form id="accountInfoRegister" name="accountInfoRegister" method="post">
 		<table>
 			<thead>
 				<th></th>
@@ -69,11 +69,9 @@
 				</tr>		
 			</tbody>
 		</table>
+		<button type="submit" onclick="saveAccount()">Créer</button>
+		<button>Annuler</button>
 	</form>
-	
-	<button onclick="saveAccount()">Créer</button>
-	
-	<button>Annuler</button>
 
 </body>
 </html>
