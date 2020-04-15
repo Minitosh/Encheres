@@ -7,8 +7,9 @@
 <title> Register</title>
 </head>
 <body>
+<script src="./assets/js/Register.js"></script>
 	<h1> Mon profil</h1>
-	<form>
+	<form id="accountInfoRegister" name="accountInfoRegister">
 		<table>
 			<thead>
 				<th></th>
