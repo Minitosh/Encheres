@@ -16,7 +16,7 @@ public class Utilisateur implements Serializable {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private float credit;
+	private int credit;
 	private Boolean administrateur;
 	
 	public int getNoUtilisateur() {
@@ -82,7 +82,7 @@ public class Utilisateur implements Serializable {
 	public float getCredit() {
 		return credit;
 	}
-	public void setCredit(float credit) {
+	public void setCredit(int credit) {
 		this.credit = credit;
 	}
 	public Boolean getAdministrateur() {
@@ -97,7 +97,7 @@ public class Utilisateur implements Serializable {
 	}
 	
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, float credit, Boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, Boolean administrateur) {
 		super();
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
