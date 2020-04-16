@@ -54,12 +54,6 @@ public final class ConnexionForm {
         }
         utilisateur.setMotDePasse( motDePasse );
 
-        if ( erreurs.isEmpty() ) {
-            resultat = "Succès de la connexion.";
-        } else {
-            resultat = "Échec de la connexion.";
-        }
-
         return utilisateur;
     }
 
@@ -69,14 +63,14 @@ public final class ConnexionForm {
                 throw new Exception( "Merci de saisir une adresse mail valide." );
             }
     	} else {
-        		throw new Exception( "Adresse Mail ou Mot de Passe incorrects." );
+        		throw new Exception( "Adresse Mail inconnue." );
         }
     }
 
     private void validationMotDePasse( String motDePasse, Utilisateur utilisateur ) throws Exception {
         if ( motDePasse != null ) {
         	if(!motDePasse.contentEquals(utilisateur.getMotDePasse())) {
-        		throw new Exception( "Adresse Mail ou Mot de Passe incorrects." );
+        		throw new Exception( "Mot de Passe incorrect." );
         	}
         } else {
         	{
