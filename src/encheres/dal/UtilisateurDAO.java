@@ -7,6 +7,7 @@ public interface UtilisateurDAO {
 	
 	public void insert(Utilisateur utilisateur) throws BusinessException;
 	public Utilisateur select(int noUtilisateur) throws BusinessException;
+	public Utilisateur select(String email) throws BusinessException;
 	public void delete(int noUtilisateur) throws BusinessException;
 
 }

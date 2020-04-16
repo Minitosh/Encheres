@@ -58,6 +58,11 @@ public class UtilisateurManager {
 		return this.utilisateurDAO.select(noUtilisateur);
 	}
 	
+	public Utilisateur selectionnerUtilisateurParEmail(String email) throws BusinessException {
+		
+		return this.utilisateurDAO.select(email);
+	}
+
 	private void validerChampStr(String champ, BusinessException businessException) {
 		if(champ.length() == 0 || champ == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_ERREUR);
