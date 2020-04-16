@@ -18,7 +18,8 @@ public class Connexion extends HttpServlet {
 	public static final String ATT_USER         = "utilisateur";
     public static final String ATT_FORM         = "form";
     public static final String ATT_SESSION_USER = "sessionUtilisateur";
-    public static final String VUE = "/WEB-INF/jsp/connexion.jsp";
+    public static final String CONNEXION_PAGE = "/WEB-INF/jsp/connexion.jsp";
+    public static final String MAIN_PAGE = "/WEB-INF/jsp/accueil.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,7 +34,12 @@ public class Connexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+		HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null) {
+			this.getServletContext().getRequestDispatcher( CONNEXION_PAGE ).forward( request, response );
+		}else {
+			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+		}
 	}
 
 	/**
@@ -58,7 +64,7 @@ public class Connexion extends HttpServlet {
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
 
-        this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+        this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
 	}
 
 }

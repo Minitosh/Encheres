@@ -30,7 +30,6 @@ public final class ConnexionForm {
         String email = getValeurChamp( request, CHAMP_EMAIL );
         String motDePasse = getValeurChamp( request, CHAMP_PASS );
 
-        Utilisateur utilisateur = new Utilisateur();
         Utilisateur utilisateurTest = new Utilisateur();
         UtilisateurManager manager = new UtilisateurManager();
         
@@ -45,16 +44,14 @@ public final class ConnexionForm {
         } catch ( Exception e ) {
             setErreur( CHAMP_EMAIL, e.getMessage() );
         }
-        utilisateur.setEmail( email );
 
         try {
             validationMotDePasse( motDePasse, utilisateurTest );
         } catch ( Exception e ) {
             setErreur( CHAMP_PASS, e.getMessage() );
         }
-        utilisateur.setMotDePasse( motDePasse );
 
-        return utilisateur;
+        return utilisateurTest;
     }
 
     private void validationEmail( String email, Utilisateur utilisateur ) throws Exception {
