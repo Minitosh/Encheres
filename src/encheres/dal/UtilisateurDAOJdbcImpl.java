@@ -1,12 +1,18 @@
 package encheres.dal;
 
-import encheres.BusinessException;
-import encheres.bo.Utilisateur;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Connection;
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
+import encheres.BusinessException;
+import encheres.bo.Utilisateur;
 
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	
@@ -26,24 +32,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			"	u.credit," +
 			"	u.administrateur" +
 			" FROM" + 
-			"	UTILISATEURS u" +
-			" WHERE u.no_utilisateur=?";
-	private static final String SELECT_UTILISATEUR_EMAIL=" SELECT " + 
-			"	u.no_utilisateur as noUtilisateur," + 
-			"	u.pseudo," +
-			"	u.nom," +
-			"	u.prenom," +
-			"	u.email," +
-			"	u.telephone," +
-			"	u.rue," +
-			"	u.code_postal as codePostal," +
-			"	u.ville," +
-			"	u.mot_de_passe as motDePasse," +
-			"	u.credit," +
-			"	u.administrateur" +
+			" UTILISATEURS u" + 
+			" INNER JOIN ARTICLE a ON l.idListe=a.idListe" +
+			" WHERE l.idListe=?";
+	private static final String SELECT_PSEUDO_EMAIL=" SELECT " + 
+			"	pseudo," +
+			"	email" +
 			" FROM" + 
-			"	UTILISATEURS u" +
-			" WHERE u.email=?";
+			" UTILISATEURS";
 	
 
 	@Override
@@ -183,6 +179,43 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		utilisateur.setCredit(rs.getInt("credit"));
 		utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 		return utilisateur;
+	}
+	
+	@Override
+	public ArrayList<ImmutablePair<String,String>> getAllPseudoEmail() throws BusinessException {
+		Utilisateur utilisateur = new Utilisateur();
+		ArrayList<ImmutablePair<String,String>> list = new ArrayList<ImmutablePair<String,String>>();
+		PreparedStatement pstmt = null;
+		Connection cnx = null;
+		try{
+			// Etape1 -Charger ledriver jdbc
+			DriverManager.registerDriver(new SQLServerDriver());
+			// Etape2 -Connection
+			String url= "jdbc:sqlserver://localhost:1433;databasename=Test_Db";
+			cnx= DriverManager.getConnection(url, "sa", "Pa$$w0rd");
+			pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next())
+			{
+					list.add(new ImmutablePair<>(rs.getString("pseudo"),rs.getString("email")));
+			}
+			pstmt.close();
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
+			throw businessException;
+		}finally {
+			try {
+				pstmt.close();
+				cnx.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 
 	
