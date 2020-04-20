@@ -24,66 +24,89 @@ import encheres.dal.UtilisateurDAO;
 @WebServlet("/ServletAccountRegister")
 public class ServletAccountRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	private UtilisateurDAO userDAO;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletAccountRegister() {
-        super();
-        userDAO = DAOFactory.getUtilisateurDAO();
-    }
+	private String msg;
+	private boolean isPseudoDuplicate;
+	private boolean isEmailDuplicate;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletAccountRegister() {
+		super();
+		userDAO = DAOFactory.getUtilisateurDAO();
+		isPseudoDuplicate = false;
+		isEmailDuplicate = false;
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String nom = (String) request.getAttribute("nom");
 		response.getWriter().append("nom get : ").append(nom);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String msg ="";
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			if(!checkPseudoEmailAlreadyExist(request.getParameter("pseudo"), request.getParameter("mail"), response,msg)) {
-			
-			addUser(request,response);
-			
-			response.getWriter().append("compte créé");
-			}else {
-				//TODO retour jsp enregistrement compte en ressetant les paramètre
-				
+			if (!checkPseudoEmailAlreadyExist(request.getParameter("pseudo"), request.getParameter("mail"), response)) {
+
+				addUser(request, response);
+
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp");
+
+				JOptionPane.showMessageDialog(null, "compte créé");
+
+				rd.forward(request, response);
+			} else {
+				// TODO retour jsp enregistrement compte en ressetant les paramètre
+				request.setAttribute("isPseudoDuplicate", isPseudoDuplicate);
+				request.setAttribute("isEmailDuplicate", isEmailDuplicate);
+
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/register.jsp");
+
 				JOptionPane.showMessageDialog(null, msg);
-				
+
 				rd.forward(request, response);
 			}
 		} catch (BusinessException e) {
-			e.printStackTrace();
-			// JSP une erreur est survenue
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp");
+
+			JOptionPane.showMessageDialog(null, "compte créé");
+
+			rd.forward(request, response);
 		}
-		
+
 	}
 
-	private boolean checkPseudoEmailAlreadyExist(String pseudo, String mail, HttpServletResponse response,String msg) throws BusinessException {
-		Boolean isPseudoExist =false;
-		ArrayList<ImmutablePair<String,String>> list = userDAO.getAllPseudoEmail();
-		for(ImmutablePair<String,String> p : list) {
-			if(p.left.equals(pseudo)) {
-				msg="Ce pseudo est déjà utilisé";
-				isPseudoExist=true;
+	private boolean checkPseudoEmailAlreadyExist(String pseudo, String mail, HttpServletResponse response)
+			throws BusinessException {
+		isEmailDuplicate = false;
+		isPseudoDuplicate = false;
+		Boolean isPseudoExist = false;
+		ArrayList<ImmutablePair<String, String>> list = userDAO.getAllPseudoEmail();
+		for (ImmutablePair<String, String> p : list) {
+			if (p.left.equals(pseudo)) {
+				msg = "Ce pseudo est déjà utilisé";
+				isPseudoExist = true;
+				isPseudoDuplicate = true;
 			}
-			if(p.right.equals(mail)) {
-				msg="Un compte est déjà associé a cet email";
+			if (p.right.equals(mail)) {
+				msg = "Un compte est déjà associé a cet email";
+				isEmailDuplicate = true;
 				return true;
-			
+
 			}
 		}
-		
+
 		return isPseudoExist;
 	}
 
@@ -97,21 +120,19 @@ public class ServletAccountRegister extends HttpServlet {
 		String cp = (String) request.getParameter("cp");
 		String ville = (String) request.getParameter("ville");
 		String mdp = (String) request.getParameter("mdp");
-		String msg = "Compte créé avec succès";
-		
-		Utilisateur user = new Utilisateur(pseudo,nom,prenom,email,tel,rue,cp,ville,mdp,0,false);
 
-		
+		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, tel, rue, cp, ville, mdp, 0, false);
+
 		try {
 			userDAO.insert(user);
 		} catch (BusinessException e) {
-			
+
 			e.printStackTrace();
 			msg = "Echec lors de la création du compte";
 		}
-		
+
 		response.getWriter().append(msg);
-		
+
 	}
 
 }
