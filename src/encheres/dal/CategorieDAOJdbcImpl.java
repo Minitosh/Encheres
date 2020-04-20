@@ -72,7 +72,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	}
 	
 	@Override
-	public List<Categorie> select() throws BusinessException {
+	public List<Categorie> selectAll() throws BusinessException {
 		// TODO Auto-generated method stub
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		try(Connection cnx = ConnectionProvider.getConnection())

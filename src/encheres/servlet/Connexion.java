@@ -34,8 +34,7 @@ public class Connexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		if(session.getAttribute(ATT_SESSION_USER) == null) {
+		if(request.getSession().getAttribute(ATT_SESSION_USER) == null) {
 			this.getServletContext().getRequestDispatcher( CONNEXION_PAGE ).forward( request, response );
 		}else {
 			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
@@ -53,18 +52,16 @@ public class Connexion extends HttpServlet {
 		
 		Utilisateur utilisateur = form.connecterUtilisateur(request);
 		
-		HttpSession session = request.getSession();
-		
 		if ( form.getErreurs().isEmpty() ) {
-            session.setAttribute( ATT_SESSION_USER, utilisateur );
+			request.getSession().setAttribute( ATT_SESSION_USER, utilisateur );
         } else {
-            session.setAttribute( ATT_SESSION_USER, null );
+        	request.getSession().setAttribute( ATT_SESSION_USER, null );
         }
 
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
 
-        if(session.getAttribute(ATT_SESSION_USER) == null) {
+        if(request.getSession().getAttribute(ATT_SESSION_USER) == null) {
 			this.getServletContext().getRequestDispatcher( CONNEXION_PAGE ).forward( request, response );
 		}else {
 			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );

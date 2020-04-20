@@ -2,6 +2,7 @@ package encheres.bll;
 
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.List;
 
 import encheres.BusinessException;
 import encheres.bo.ArticleVendu;
@@ -48,12 +49,20 @@ public class ArticleVenduManager {
 		return articleVendu;
 	}
 	
-	public ArticleVendu selectionnerArticleVenduParNom(String nomArticle) throws BusinessException {
-		return this.articleVenduDAO.select(nomArticle);
+	public ArticleVendu selectionnerArticleVenduParNoArticleVendu(int noArticleVendu) throws BusinessException {
+		return this.articleVenduDAO.selectByNoArticleVendu(noArticleVendu);
 	}
 	
-	public ArticleVendu selectionnerArticleVenduParNoCategorie(int noCategorie) throws BusinessException {
-		return this.articleVenduDAO.select(noCategorie);
+	public ArticleVendu selectionnerArticleVenduParNom(String nomArticle) throws BusinessException {
+		return this.articleVenduDAO.selectByNom(nomArticle);
+	}
+	
+	public List<ArticleVendu> selectionnerArticleVenduParNoCategorie(int noCategorie) throws BusinessException {
+		return this.articleVenduDAO.selectAllByCategorie(noCategorie);
+	}
+	
+	public List<ArticleVendu> selectionnerArticleVenduParNoUtilisateur(int noUtilisateur) throws BusinessException {
+		return this.articleVenduDAO.selectAllByUtilisateur(noUtilisateur);
 	}
 	
 	public void supprimerArticleVendu(int noArticleVendu) throws BusinessException {
