@@ -1,7 +1,7 @@
 package encheres.bo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Enchere implements Serializable {
 
@@ -9,6 +9,8 @@ public class Enchere implements Serializable {
 	
 	private Date dateEnchere;
 	private float montantEnchere;
+	private int noUtilisateur;
+	private int noArticle;
 	
 	public Date getDateEnchere() {
 		return dateEnchere;
@@ -22,16 +24,33 @@ public class Enchere implements Serializable {
 	public void setMontantEnchere(float montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	public int getNoArticle() {
+		return noArticle;
+	}
+	public void setNoArticle(int noArticle) {
+		this.noArticle = noArticle;
+	}
+	public Enchere() {
+		
+	}
 	
-	public Enchere(Date dateEnchere, float montantEnchere) {
+	public Enchere(Date dateEnchere, float montantEnchere, int noUtilisateur, int noArticle) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
+		this.noUtilisateur = noUtilisateur;
+		this.noArticle = noArticle;
 	}
 	
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + "]";
+		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", noUtilisateur=" + noUtilisateur + ", noArticle=" + noArticle + "]";
 	}
 	
 	

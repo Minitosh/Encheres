@@ -36,7 +36,7 @@ public class CategorieManager {
 	}
 	
 	public List<Categorie> selectionnerToutesLesCategories() throws BusinessException {
-		return this.categorieDAO.select();
+		return this.categorieDAO.selectAll();
 	}
 	
 	public Categorie selectionnerCategorieParNo(int noCategorie) throws BusinessException {
