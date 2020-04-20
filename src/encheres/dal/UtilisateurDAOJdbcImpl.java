@@ -18,18 +18,19 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT_UTILISATEUR = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) values(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur = ?";
+	
 	private static final String SELECT_UTILISATEUR_NO = " SELECT " + "	u.no_utilisateur as noUtilisateur,"
 			+ "	u.pseudo," + "	u.nom," + "	u.prenom," + "	u.email," + "	u.telephone," + "	u.rue,"
 			+ "	u.code_postal as codePostal," + "	u.ville," + "	u.mot_de_passe as motDePasse," + "	u.credit,"
-			+ "	u.administrateur" + " FROM" + " UTILISATEURS u" + " INNER JOIN ARTICLE a ON l.idListe=a.idListe"
-			+ " WHERE l.idListe=?";
-	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + "	pseudo," + "	email" + " FROM"
+			+ "	u.administrateur" + " FROM" + " UTILISATEURS u " + "WHERE u.no_utilisateur=?";
+	
+	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + " pseudo," + " email" + " FROM"
 			+ " UTILISATEURS";
 
-	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + "	u.no_utilisateur as noUtilisateur,"
-			+ "	u.pseudo," + "	u.nom," + "	u.prenom," + "	u.email," + "	u.telephone," + "	u.rue,"
-			+ "	u.code_postal as codePostal," + "	u.ville," + "	u.mot_de_passe as motDePasse," + "	u.credit,"
-			+ "	u.administrateur" + " FROM" + " UTILISATEURS u" + "WHERE u.email=?";
+	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + " no_utilisateur as noUtilisateur,"
+			+ "	pseudo," + " nom," + " prenom," + "	email," + " telephone," + "	rue,"
+			+ "	code_postal as codePostal," + "	ville," + "	mot_de_passe as motDePasse," + " credit,"
+			+ "	administrateur" + " FROM" + " UTILISATEURS" + " WHERE email = ?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {

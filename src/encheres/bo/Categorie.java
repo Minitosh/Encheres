@@ -22,6 +22,10 @@ public class Categorie implements Serializable {
 		this.libelle = libelle;
 	}
 	
+	public Categorie() {
+		
+	}
+	
 	public Categorie(int noCategorie, String libelle) {
 		super();
 		this.noCategorie = noCategorie;
