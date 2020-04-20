@@ -21,7 +21,6 @@ public class UtilisateurManager {
 		this.validerChampStr(nom, businessException);
 		this.validerChampStr(prenom, businessException);
 		this.validerChampStr(email, businessException);
-		this.validerChampStr(telephone, businessException);
 		this.validerChampStr(rue, businessException);
 		this.validerChampStr(codePostal, businessException);
 		this.validerChampStr(ville, businessException);
@@ -61,6 +60,19 @@ public class UtilisateurManager {
 	public Utilisateur selectionnerUtilisateurParEmail(String email) throws BusinessException {
 		
 		return this.utilisateurDAO.select(email);
+	}
+	
+	public void supprimerUtilisateur(int noUtilisateur) throws BusinessException {
+		BusinessException businessException = new BusinessException();
+		
+		if(!businessException.hasErreurs())
+		{	
+			this.utilisateurDAO.delete(noUtilisateur);
+		}
+		else
+		{
+			throw businessException;
+		}
 	}
 
 	private void validerChampStr(String champ, BusinessException businessException) {

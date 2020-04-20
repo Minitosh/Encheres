@@ -12,9 +12,11 @@ public class ArticleVendu implements Serializable {
 	private String description;
 	private Date dateDebutEncheres;
 	private Date dateFinEncheres;
-	private float miseAPrix;
-	private float prixVente;
+	private int miseAPrix;
+	private int prixVente;
 	private String etatVente;
+	private int noUtilisateur;
+	private int noCategorie;
 	
 	
 	
@@ -84,7 +86,7 @@ public class ArticleVendu implements Serializable {
 
 
 
-	public void setMiseAPrix(float miseAPrix) {
+	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
 
@@ -96,7 +98,7 @@ public class ArticleVendu implements Serializable {
 
 
 
-	public void setPrixVente(float prixVente) {
+	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
 
@@ -111,11 +113,30 @@ public class ArticleVendu implements Serializable {
 	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
+	
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+	
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	
+	public int getNoCategorie() {
+		return noCategorie;
+	}
+	
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+	
+	public ArticleVendu() {
+		
+	}
 
 	
-
 	public ArticleVendu(int noArticle, String nomArticle, String description, Date dateDebutEncheres,
-			Date dateFinEncheres, float miseAPrix, float prixVente, String etatVente) {
+			Date dateFinEncheres, int miseAPrix, int prixVente, String etatVente, int noUtilisateur, int noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
@@ -125,6 +146,8 @@ public class ArticleVendu implements Serializable {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
 	}
 
 
@@ -132,7 +155,7 @@ public class ArticleVendu implements Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente +"]";
+		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description + ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix=" + miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie=" + noCategorie +"]";
 	}
 	
 	

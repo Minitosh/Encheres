@@ -21,7 +21,7 @@
 	                <div class="erreur">${form.erreurs['email']}</div>
 	                <br />
 	
-	                <label for="motdepasse">Mot de passe <span class="requis">*</span></label>
+	                <label for="motDePasse">Mot de passe <span class="requis">*</span></label>
 	                <input class="form-control" type="password" id="motDePasse" name="motDePasse" value="" size="20" maxlength="20" />
 	                <div class="erreur">${form.erreurs['motDePasse']}</div>
 	                <br />

@@ -64,7 +64,11 @@ public class Connexion extends HttpServlet {
         request.setAttribute( ATT_FORM, form );
         request.setAttribute( ATT_USER, utilisateur );
 
-        this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+        if(session.getAttribute(ATT_SESSION_USER) == null) {
+			this.getServletContext().getRequestDispatcher( CONNEXION_PAGE ).forward( request, response );
+		}else {
+			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+		}
 	}
 
 }

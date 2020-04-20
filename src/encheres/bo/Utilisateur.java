@@ -132,7 +132,7 @@ public class Utilisateur implements Serializable {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", credit=" + credit + ", administrateur=" + administrateur +"]";
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", motDePasse=" + motDePasse + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom=" + prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + ", credit=" + credit + ", administrateur=" + administrateur +"]";
 	}
 	
 	

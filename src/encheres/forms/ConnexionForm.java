@@ -65,7 +65,7 @@ public final class ConnexionForm {
     }
 
     private void validationMotDePasse( String motDePasse, Utilisateur utilisateur ) throws Exception {
-        if ( motDePasse != null ) {
+    	if ( motDePasse != null ) {
         	if(!motDePasse.contentEquals(utilisateur.getMotDePasse())) {
         		throw new Exception( "Mot de Passe incorrect." );
         	}
