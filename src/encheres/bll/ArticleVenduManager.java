@@ -57,11 +57,15 @@ public class ArticleVenduManager {
 		return this.articleVenduDAO.selectByNom(nomArticle);
 	}
 	
-	public List<ArticleVendu> selectionnerArticleVenduParNoCategorie(int noCategorie) throws BusinessException {
+	public List<ArticleVendu> selectionnerTousLesArticleVendu() throws BusinessException {
+		return this.articleVenduDAO.selectAll();
+	}
+	
+	public List<ArticleVendu> selectionnerTousLesArticleVenduParNoCategorie(int noCategorie) throws BusinessException {
 		return this.articleVenduDAO.selectAllByCategorie(noCategorie);
 	}
 	
-	public List<ArticleVendu> selectionnerArticleVenduParNoUtilisateur(int noUtilisateur) throws BusinessException {
+	public List<ArticleVendu> selectionnerTousLesArticleVenduParNoUtilisateur(int noUtilisateur) throws BusinessException {
 		return this.articleVenduDAO.selectAllByUtilisateur(noUtilisateur);
 	}
 	

@@ -8,7 +8,7 @@ public class Enchere implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Date dateEnchere;
-	private float montantEnchere;
+	private int montantEnchere;
 	private int noUtilisateur;
 	private int noArticle;
 	
@@ -21,7 +21,7 @@ public class Enchere implements Serializable {
 	public float getMontantEnchere() {
 		return montantEnchere;
 	}
-	public void setMontantEnchere(float montantEnchere) {
+	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
 	public int getNoUtilisateur() {
@@ -40,7 +40,7 @@ public class Enchere implements Serializable {
 		
 	}
 	
-	public Enchere(Date dateEnchere, float montantEnchere, int noUtilisateur, int noArticle) {
+	public Enchere(Date dateEnchere, int montantEnchere, int noUtilisateur, int noArticle) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
