@@ -172,7 +172,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
-		Utilisateur utilisateur = new Utilisateur();
 		ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
 		PreparedStatement pstmt = null;
 		Connection cnx = null;

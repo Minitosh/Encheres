@@ -14,4 +14,8 @@ public abstract class CodesResultatDAL {
 	
 	public static final int LECTURE_CATEGORIE_ECHEC=10005;
 	
+	public static final int LECTURE_ENCHERE_ECHEC=10006;
+	
+	public static final int LECTURE_RETRAIT_ECHEC=10007;
+	
 }

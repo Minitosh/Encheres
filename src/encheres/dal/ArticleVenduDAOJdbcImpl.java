@@ -208,6 +208,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 		try(Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ARTICLE_VENDU_CATEGORIE);
+			pstmt.setInt(1, noCategorie);
 			ResultSet rs = pstmt.executeQuery();
 			ArticleVendu articleVenduCourant=new ArticleVendu();
 			while(rs.next())
