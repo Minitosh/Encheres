@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>Encheres</display-name>
-  <welcome-file-list>
-    <welcome-file>Connexion</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Connexion</servlet-name>
-    <servlet-class>encheres.servlet.Connexion</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Connexion</servlet-name>
-    <url-pattern>/connexion</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>Deconnexion</servlet-name>
-    <servlet-class>encheres.servlet.Deconnexion</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Deconnexion</servlet-name>
-    <url-pattern>/deconnexion</url-pattern>
-  </servlet-mapping>
- <!-- <servlet>
-    <description></description>
-    <display-name>ServletMainPage</display-name>
-    <servlet-name>ServletMainPage</servlet-name>
-    <servlet-class>servlet.ServletAccountRegister</servlet-class>
-  </servlet> --> 
+  	<display-name>Encheres</display-name>
+	 <welcome-file-list>
+	   <welcome-file>Accueil</welcome-file>
+	 </welcome-file-list>
+  	<servlet>
+		<servlet-name>Connexion</servlet-name>
+		<servlet-class>encheres.servlet.Connexion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Connexion</servlet-name>
+		<url-pattern>/connexion</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Deconnexion</servlet-name>
+		<servlet-class>encheres.servlet.Deconnexion</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Deconnexion</servlet-name>
+		<url-pattern>/deconnexion</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>ServletAccountRegister</servlet-name>
+		<servlet-class>servlet.ServletAccountRegister</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletAccountRegister</servlet-name>
+		<url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
 </web-app>

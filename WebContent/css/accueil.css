@@ -1,0 +1,19 @@
+.header {
+	text-align: center;
+}
+
+.login-section {
+	margin-top: 10px;
+	display: flex;
+	align-items: baseline;
+	justify-content: flex-end;
+}
+
+.user-image {
+	height: 30px;
+    width: 30px;
+}
+
+.title-section {
+	justify-content: center;
+}
