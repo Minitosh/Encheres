@@ -1,6 +1,9 @@
 /**
  * 
  */
+function cancel(){
+	 document.location.href='/Encheres/Acceuil';
+}
 
 function saveAccount(){
 	var mdp = document.getElementById("mdp");

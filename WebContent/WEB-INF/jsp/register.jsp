@@ -66,8 +66,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<button type="submit" onclick="saveAccount()">Créer</button>
-		<button>Annuler</button>
+		<button type="button" onclick="saveAccount()">Créer</button>
+		<button type="button" onclick="cancel()">Annuler</button>
 	</form>
 
 </body>
