@@ -1,4 +1,4 @@
-package encheres.servlet;
+package servlet;
 
 import java.io.IOException;
 

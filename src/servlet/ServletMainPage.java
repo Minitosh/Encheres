@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletMainPage
  */
-@WebServlet("/Acceuil")
+@WebServlet("/Accueil")
 public class ServletMainPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String MAIN_PAGE = "/WEB-INF/jsp/accueil.jsp";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -27,7 +28,7 @@ public class ServletMainPage extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
 	}
 
 	/**
