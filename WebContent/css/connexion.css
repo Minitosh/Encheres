@@ -9,17 +9,33 @@ body {
   background-image: url('../img/back.jpg');
 }
 
+.colonne {
+	margin-left: 70px;
+    margin-right: 70px;
+}
+
 .content {
+	margin-top: 120px;
+}
+
+.content-left {
   background-color:rgba(255,255,255,.8);
   border-radius:.25em;
   box-shadow:0 0 .25em rgba(0,0,0,.25);
   box-sizing:border-box;
-  left:50%;
   padding:10vmin;
-  position:fixed;
   text-align:center;
   top:50%;
-  transform:translate(-50%, -50%);
+}
+
+.content-right {
+  background-color:rgba(255,255,255,.8);
+  border-radius:.25em;
+  box-shadow:0 0 .25em rgba(0,0,0,.25);
+  box-sizing:border-box;
+  padding:10vmin;
+  text-align:center;
+  top:50%;
 }
 
 h1 {
