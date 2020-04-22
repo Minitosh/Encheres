@@ -19,7 +19,7 @@
 			            	<img src="img/register.svg" class="login-image"/>
 			                <h2>Pas encore inscrit ?</h2>
 			                <br>
-			                <a href="<%=request.getContextPath()%>/ServletAccountRegister"><input class="btn btn-outline-info" type="button" value="Inscription"/></a>			                
+			                <a href="<%=request.getContextPath()%>/AccountRegister"><input class="btn btn-outline-info" type="button" value="Inscription"/></a>			                
 			            </fieldset>
 		        	</form>
 	    		  </div>
