@@ -1,9 +1,9 @@
 .header {
 	text-align: center;
+	margin-top: 10px;
 }
 
 .login-section {
-	margin-top: 10px;
 	display: flex;
 	align-items: baseline;
 	justify-content: flex-end;
@@ -16,4 +16,31 @@
 
 .title-section {
 	justify-content: center;
+}
+
+.filtres-title h3 {
+	padding-right: 759px;
+    padding-top: 40px;	
+}
+
+.filtres-section {
+	text-align: left;
+	padding: 45px;
+}
+
+.filtres-colonne {
+	display: flex;
+    flex-direction: column;
+}
+
+.filtres-colonne label {
+	margin-top: 10px;
+}
+
+.recherche-colonne {
+	display: flex;
+}
+
+.recherche-bouton {
+	width: 200px;
 }
