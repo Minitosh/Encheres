@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Register</title>
+<title>Inscription</title>
 </head>
 <body>
 <script src="./assets/js/Register.js"></script>
-	<h1> Mon profil</h1>
+	<h1>Mon profil</h1>
 	<form id="accountInfoRegister" name="accountInfoRegister" action="ServletAccountRegister" method="POST">
 		<table>
 			<thead>

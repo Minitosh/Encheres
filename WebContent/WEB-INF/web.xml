@@ -21,11 +21,11 @@
 		<url-pattern>/deconnexion</url-pattern>
 	</servlet-mapping>
 	<servlet>
-		<servlet-name>ServletAccountRegister</servlet-name>
-		<servlet-class>servlet.ServletAccountRegister</servlet-class>
+		<servlet-name>AccountRegister</servlet-name>
+		<servlet-class>servlet.ServletPageAccountRegister</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>ServletAccountRegister</servlet-name>
+		<servlet-name>AccountRegister</servlet-name>
 		<url-pattern>/inscription</url-pattern>
 	</servlet-mapping>
 </web-app>
