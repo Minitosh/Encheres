@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import encheres.bll.ArticleVenduManager;
 import encheres.bll.CategorieManager;
+import encheres.bll.EnchereManager;
+import encheres.bo.ArticleVendu;
 import encheres.bo.Categorie;
+import encheres.bo.Enchere;
 
 /**
  * Servlet implementation class ServletMainPage
@@ -36,10 +40,21 @@ public class ServletMainPage extends HttpServlet {
 		// Récupération des Catégories
 		try {
 			CategorieManager categorieManager = new CategorieManager();
+			EnchereManager enchereManager = new EnchereManager();
+			ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+			
+			List<Enchere> listeEnchere = null;
 			List<Categorie> listeCategorie = null;
+			List<ArticleVendu> listeArticleVendu = null;
 			
 			listeCategorie = categorieManager.selectionnerToutesLesCategories();
+			listeEnchere = enchereManager.selectionnerToutesLesEnchere();
+			listeArticleVendu = articleVenduManager.selectionnerTousLesArticleVendu();
+			
 			request.setAttribute("listeCategorie", listeCategorie);
+			request.setAttribute("listeEnchere", listeEnchere);
+			request.setAttribute("listeArticleVendu", listeArticleVendu);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

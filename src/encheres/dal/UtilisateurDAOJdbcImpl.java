@@ -89,7 +89,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setInt(1, noUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_utilisateur") != utilisateur.getNoUtilisateur()) {
+				if (rs.getInt("noUtilisateur") != utilisateur.getNoUtilisateur()) {
 					utilisateur = utilisateurBuilder(rs);
 				}
 			}

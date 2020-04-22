@@ -1,9 +1,13 @@
+<%@page import="encheres.bll.UtilisateurManager"%>
+<%@page import="encheres.bll.ArticleVenduManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="encheres.bo.ArticleVendu"%>
 <%@page import="encheres.bo.Categorie"%>
+<%@page import="encheres.bo.Enchere"%>
+<%@page import="encheres.bo.Utilisateur"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -71,18 +75,27 @@
 			    <div class="col-sm">
 			    </div>
 		  	</div>
-		  	<%
-				List<ArticleVendu> listeArticleVendu = (List<ArticleVendu>) request.getAttribute("listeArticleVendu");
-				if(listeArticleVendu!=null && listeArticleVendu.size()>0)
-					{
-			%>
-		  	<!-- DEBUT DU FOREACH(ARTICLES)  -->
-		  	<c:forEach var="a" items="${listeArticleVendu}">
-		  		
-		  	</c:forEach>
-		  	<%
-					}
-		  	%>
+		  	<div class="row encheres-section">
+			  	<%
+					List<Enchere> listeEnchere = (List<Enchere>) request.getAttribute("listeEnchere");
+			  		if(listeEnchere!=null && listeEnchere.size()>0){
+			  			for (Enchere e : listeEnchere){
+			  				ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
+				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
+				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(e.getNoUtilisateur());
+				  			%>
+				  				<div class="enchere" id="${a.getNoArticle()}">
+				  					<h5><%=a.getNomArticle()%></h5>
+				  					<p>Prix : <%=a.getMiseAPrix()%> crédits</p>
+				  					<p>Fin de l'enchère : <%=a.getDateFinEncheres()%></p>
+				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
+				  				</div>
+				  			<%
+				  		}	
+			  		}
+				%>
+		  	</div>
 		</div>
 	</body>
 </html>

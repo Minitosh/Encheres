@@ -135,7 +135,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					ResultSet rs = pstmt.executeQuery();
 					while(rs.next())
 					{
-							if(rs.getInt("no_article")!=articleVendu.getNoArticle())
+							if(rs.getInt("noArticle")!=articleVendu.getNoArticle())
 							{
 								articleVendu = articleVenduBuilder(rs);
 							}
@@ -159,7 +159,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 					ResultSet rs = pstmt.executeQuery();
 					while(rs.next())
 					{
-							if(rs.getString("nom_article")!=articleVendu.getNomArticle())
+							if(rs.getString("nomArticle")!=articleVendu.getNomArticle())
 							{
 								articleVendu = articleVenduBuilder(rs);
 							}
@@ -184,7 +184,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			ArticleVendu articleVenduCourant=new ArticleVendu();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=articleVenduCourant.getNoArticle())
+				if(rs.getInt("noArticle")!=articleVenduCourant.getNoArticle())
 				{
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);
@@ -213,7 +213,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			ArticleVendu articleVenduCourant=new ArticleVendu();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=articleVenduCourant.getNoArticle())
+				if(rs.getInt("noArticle")!=articleVenduCourant.getNoArticle())
 				{
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);
@@ -241,7 +241,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO{
 			ArticleVendu articleVenduCourant=new ArticleVendu();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=articleVenduCourant.getNoArticle())
+				if(rs.getInt("noArticle")!=articleVenduCourant.getNoArticle())
 				{
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);

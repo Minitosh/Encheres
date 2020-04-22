@@ -15,7 +15,7 @@ public class RetraitDAOJdbcImpl implements RetraitDAO {
 	private static final String SELECT_RETRAIT = "	r.no_article as noArticle," + 
 			"	r.rue" +
 			"	r.code_postal as codePostal," +
-			"	r.ville," +
+			"	r.ville" +
 			" FROM" + 
 			"	RETRAITS r" +
 			" WHERE r.no_article = ?";

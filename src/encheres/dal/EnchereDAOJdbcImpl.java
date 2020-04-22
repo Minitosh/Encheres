@@ -19,34 +19,34 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
-			"	e.montant_enchere as montantEncheres," +
+			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e";
 	private static final String SELECT_ENCHERE_UTILISATEUR = "	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
-			"	e.montant_enchere as montantEncheres," +
+			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.no_utilisateur = ?";
 	private static final String SELECT_ENCHERE_ARTICLE = "	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
-			"	e.montant_enchere as montantEncheres," +
+			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.no_article = ?";
 	private static final String SELECT_ENCHERE_DATE = "	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
-			"	e.montant_enchere as montantEncheres," +
+			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.date_enchere = ?";
 	private static final String SELECT_ENCHERE_PERIODE = "	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
-			"	e.montant_enchere as montantEncheres," +
+			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.date_enchere BETWEEN ? AND ?";
@@ -98,7 +98,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			Enchere enchereCourante=new Enchere();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=enchereCourante.getNoArticle())
+				if(rs.getInt("noArticle")!=enchereCourante.getNoArticle())
 				{
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
