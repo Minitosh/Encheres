@@ -58,3 +58,17 @@
     text-align: left;
     padding: 10px;
 }
+
+.enchere:hover {
+	box-shadow: 0px 1px 12px 0px #17a2b8;
+}
+
+.enchere-prix {
+	color: #17a2b8;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.encheres-section p {
+	font-weight: 500;
+}

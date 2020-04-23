@@ -1,0 +1,15 @@
+INSERT INTO UTILISATEURS (pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) VALUES ('Minitosh', 'Deshayes', 'Marc', 'marc.deshayes44@gmail.com', '0760767330', '68 Boulevard des Poilus', '44300', 'Nantes', 'Bonjour44', 1000, 1);
+INSERT INTO CATEGORIES (libelle) VALUES ('Informatique');
+INSERT INTO CATEGORIES (libelle) VALUES ('Ameublement');
+INSERT INTO CATEGORIES (libelle) VALUES ('Vêtements');
+INSERT INTO CATEGORIES (libelle) VALUES ('Sports & Loisirs');
+INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES ('PS4', 'Playstation 4 avec 100 jeux.', '2020-04-22', '2020-04-22', 250, null, 1, 1);
+INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES ('XBOX One', 'XBOX One avec 100 jeux.', '2020-04-22', '2020-04-22', 250, null, 1, 1);
+INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES ('Vest TH', 'Veste Tommy Highlfiger, taille XL', '2020-04-22', '2020-04-22', 80, null, 1, 3);
+INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES ('Armoire', '', '2020-04-22', '2020-04-22', 580, null, 1, 2);
+INSERT INTO ARTICLES_VENDUS (nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_utilisateur, no_categorie) VALUES ('PC Portable ASUS', '120Go, Processeur Intel Core I3, NVIDIA Geforce 1080', '2020-04-23', '2020-04-23', 875, null, 1, 1);
+INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (1, 1, 2020-04-22, 250);
+INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (1, 2, 2020-04-22, 250);
+INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (1, 3, 2020-04-22, 80);
+INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (1, 4, 2020-04-22, 580);
+INSERT INTO ENCHERES (no_utilisateur, no_article, date_enchere, montant_enchere) VALUES (1, 5, 2020-04-22, 875);

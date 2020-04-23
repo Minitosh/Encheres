@@ -1,5 +1,6 @@
 <%@page import="encheres.bll.UtilisateurManager"%>
 <%@page import="encheres.bll.ArticleVenduManager"%>
+<%@page import="encheres.bll.CategorieManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -82,15 +83,18 @@
 			  			for (Enchere e : listeEnchere){
 			  				ArticleVenduManager articleVenduManager = new ArticleVenduManager();
 			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
+			  				CategorieManager categorieManager = new CategorieManager();
 				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
 				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(e.getNoUtilisateur());
+				  			Categorie c = categorieManager.selectionnerCategorieParNo(a.getNoCategorie());
 				  			%>
-				  				<div class="enchere" id="${a.getNoArticle()}">
-				  					<h5><%=a.getNomArticle()%></h5>
-				  					<p>Prix : <%=a.getMiseAPrix()%> crédits</p>
+			  					<div class="enchere" id="${a.getNoArticle()}" onclick="">
+				  					<h5><strong><%=a.getNomArticle()%></strong></h5>
+				  					<p class="enchere-prix"><%=a.getMiseAPrix()%> crédits</p>
+				  					<p class="enchere-categorie"><%=c.getLibelle()%></p>
 				  					<p>Fin de l'enchère : <%=a.getDateFinEncheres()%></p>
 				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
-				  				</div>
+			  					</div>
 				  			<%
 				  		}	
 			  		}

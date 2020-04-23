@@ -70,7 +70,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 			ResultSet rs = pstmt.executeQuery();
 			Categorie categorieCourante = new Categorie();
 			while (rs.next()) {
-				if (rs.getInt("nocategorie") != categorieCourante.getNoCategorie()) {
+				if (rs.getInt("noCategorie") != categorieCourante.getNoCategorie()) {
 					categorieCourante = categorieBuilder(rs);
 					listeCategorie.add(categorieCourante);
 				}
@@ -101,7 +101,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 			pstmt.setInt(1, noCategorie);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_categorie") != categorie.getNoCategorie()) {
+				if (rs.getInt("noCategorie") != categorie.getNoCategorie()) {
 					categorie = categorieBuilder(rs);
 				}
 			}
