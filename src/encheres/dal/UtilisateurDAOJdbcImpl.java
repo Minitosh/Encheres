@@ -171,38 +171,38 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
-		ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
-		PreparedStatement pstmt = null;
-		Connection cnx = null;
-		try {
-			// Etape1 -Charger ledriver jdbc
-			DriverManager.registerDriver(new SQLServerDriver());
-			// Etape2 -Connection
-			String url = "jdbc:sqlserver://localhost:1433;databasename=Test_Db";
-			cnx = DriverManager.getConnection(url, "sa", "Pa$$w0rd");
-			pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				list.add(new ImmutablePair<>(rs.getString("pseudo"), rs.getString("email")));
-			}
-			pstmt.close();
-			cnx.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			BusinessException businessException = new BusinessException();
-			businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
-			throw businessException;
-		} finally {
-			try {
-				pstmt.close();
-				cnx.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return list;
-	}
+    public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
+        ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
+        PreparedStatement pstmt = null;
+
+ 
+
+        try (Connection cnx = ConnectionProvider.getConnection()) {
+
+ 
+
+            cnx.setAutoCommit(false);
+            pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                list.add(new ImmutablePair<>(rs.getString("pseudo"), rs.getString("email")));
+            }
+            pstmt.close();
+            cnx.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            BusinessException businessException = new BusinessException();
+            businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
+            throw businessException;
+        } finally {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
+        return list;
+    }
 
 }

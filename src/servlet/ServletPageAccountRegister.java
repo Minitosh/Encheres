@@ -55,7 +55,7 @@ public class ServletPageAccountRegister extends HttpServlet {
 			// Etape1 -Charger ledriver jdbc
 			DriverManager.registerDriver(new SQLServerDriver());
 			// Etape2 -Connection
-			String url = "jdbc:sqlserver://localhost:1433;databasename=Test_Db";
+			String url = "jdbc:sqlserver://localhost:1433;databasename=encheres";
 			con = DriverManager.getConnection(url, "sa", "Pa$$w0rd");
 			System.out.println("Connexion active");
 		} catch (SQLException e) {
