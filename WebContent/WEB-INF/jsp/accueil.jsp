@@ -23,7 +23,7 @@
 	<body>
 		<!-- <h1>${sessionScope.sessionUtilisateur.prenom} ? Bienvenue, ${sessionScope.sessionUtilisateur.prenom} :  </h1> -->
 		<div class="container-fluid header">
-			<div class="row">
+			<div class="row header-text">
 			    <div class="col">
 			    	<h2>ENI-Enchères</h2>
 			    </div>
@@ -39,7 +39,7 @@
 			    		%>
 			    			<img src="img/user.svg" class="user-image"/>
 			    			<p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p>
-			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-outline-danger replay" type="button" value="Déconnexion"/></a>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-danger" type="button" value="Déconnexion"/></a>
 			    		<%
 			    	}
 			    %>
@@ -62,8 +62,7 @@
 		  	<div class="row filtres-section">
 		  		<div class="col-sm filtres-colonne">
 			      <input class="form-control" type="text" placeholder="Nom">
-    				<label for="categorieSelect">Catégorie :</label>
-				    <select class="form-control" id="categorieSelect">
+				    <select class="form-control filtres-select" id="categorieSelect">
 				      <option style="color: #AFAFAF;">Selectionnez une catégorie</option>
 				      <c:forEach var="c" items="${listeCategorie}">
 		  					<option>${c.getLibelle()}</option>
@@ -102,4 +101,7 @@
 		  	</div>
 		</div>
 	</body>
+	<footer>
+		<p>Copyrights, All rights reserved</p>
+	</footer>
 </html>
