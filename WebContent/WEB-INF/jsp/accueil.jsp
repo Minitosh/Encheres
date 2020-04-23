@@ -1,9 +1,14 @@
+<%@page import="encheres.bll.UtilisateurManager"%>
+<%@page import="encheres.bll.ArticleVenduManager"%>
+<%@page import="encheres.bll.CategorieManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="encheres.bo.ArticleVendu"%>
 <%@page import="encheres.bo.Categorie"%>
+<%@page import="encheres.bo.Enchere"%>
+<%@page import="encheres.bo.Utilisateur"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -18,7 +23,7 @@
 	<body>
 		<!-- <h1>${sessionScope.sessionUtilisateur.prenom} ? Bienvenue, ${sessionScope.sessionUtilisateur.prenom} :  </h1> -->
 		<div class="container-fluid header">
-			<div class="row">
+			<div class="row header-text">
 			    <div class="col">
 			    	<h2>ENI-Enchères</h2>
 			    </div>
@@ -34,7 +39,7 @@
 			    		%>
 			    			<img src="img/user.svg" class="user-image"/>
 			    			<p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p>
-			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-outline-danger replay" type="button" value="Déconnexion"/></a>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-danger" type="button" value="Déconnexion"/></a>
 			    		<%
 			    	}
 			    %>
@@ -57,8 +62,7 @@
 		  	<div class="row filtres-section">
 		  		<div class="col-sm filtres-colonne">
 			      <input class="form-control" type="text" placeholder="Nom">
-    				<label for="categorieSelect">Catégorie :</label>
-				    <select class="form-control" id="categorieSelect">
+				    <select class="form-control filtres-select" id="categorieSelect">
 				      <option style="color: #AFAFAF;">Selectionnez une catégorie</option>
 				      <c:forEach var="c" items="${listeCategorie}">
 		  					<option>${c.getLibelle()}</option>
@@ -71,18 +75,33 @@
 			    <div class="col-sm">
 			    </div>
 		  	</div>
-		  	<%
-				List<ArticleVendu> listeArticleVendu = (List<ArticleVendu>) request.getAttribute("listeArticleVendu");
-				if(listeArticleVendu!=null && listeArticleVendu.size()>0)
-					{
-			%>
-		  	<!-- DEBUT DU FOREACH(ARTICLES)  -->
-		  	<c:forEach var="a" items="${listeArticleVendu}">
-		  		
-		  	</c:forEach>
-		  	<%
-					}
-		  	%>
+		  	<div class="row encheres-section">
+			  	<%
+					List<Enchere> listeEnchere = (List<Enchere>) request.getAttribute("listeEnchere");
+			  		if(listeEnchere!=null && listeEnchere.size()>0){
+			  			for (Enchere e : listeEnchere){
+			  				ArticleVenduManager articleVenduManager = new ArticleVenduManager();
+			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
+			  				CategorieManager categorieManager = new CategorieManager();
+				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
+				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(e.getNoUtilisateur());
+				  			Categorie c = categorieManager.selectionnerCategorieParNo(a.getNoCategorie());
+				  			%>
+			  					<div class="enchere" id="${a.getNoArticle()}" onclick="">
+				  					<h5><strong><%=a.getNomArticle()%></strong></h5>
+				  					<p class="enchere-prix"><%=a.getMiseAPrix()%> crédits</p>
+				  					<p class="enchere-categorie"><%=c.getLibelle()%></p>
+				  					<p>Fin de l'enchère : <%=a.getDateFinEncheres()%></p>
+				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
+			  					</div>
+				  			<%
+				  		}	
+			  		}
+				%>
+		  	</div>
 		</div>
 	</body>
+	<footer>
+		<p>Copyrights, All rights reserved</p>
+	</footer>
 </html>
