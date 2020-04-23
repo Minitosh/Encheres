@@ -1,77 +1,115 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title> Register</title>
-</head>
-<body>
-<script src="./assets/js/Register.js"></script>
-	<h1> Mon profil</h1>
+    <head>
+    	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="css/connexion.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+        <meta charset="utf-8" />
+        <title>S'enregister</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>
+    	<div class="container-fluid content">
+    		<div class="row content">
+    			<div class="col-md-6 col-sm offset-md-3">
+			      <script src="./assets/js/Register.js"></script>
+	<h1 style="text-align:center;"> Mon profil</h1>
 	<form id="accountInfoRegister" name="accountInfoRegister" action="ServletAccountRegister" method="POST">
-		<table>
-			<thead>
-				<th></th>
-				<th></th>
-			</thead>
-			<tbody>
-			<tr>
-				<td>
-					<label for="pseudo">Pseudo :</label>
-					<input type="text" name="pseudo" id="pseudo" required>
-				</td>
-				<td>
-					<label for="nom">Nom :</label>
-					<input type="text" name="nom" id="nom" pattern="[a-zA-Z -]+" required>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				<label for="prenom">Prenom :</label>
-				<input type="text" name="prenom" id="prenom" pattern="[a-zA-Z -]+" required>
-				</td>
-				<td>
-				
-				<label for="mail">Email :</label>
-				<input type="email" name="mail" id="mail" required>
-				</td>
-			</tr>
-			<tr>
-				<td>
-				<label for="tel">Telephone :</label>
-				<input type="tel" name="tel" id="tel" pattern="[0-9]{5}" >
-				</td>
-				<td>
-				<label for="rue">Rue :</label>
-				<input type="text" name="rue" id="rue" required>
-				</td>
-				</tr>
-				<tr>
-				<td>
-				<label for="cp">Code postal :</label>
-				<input type="number" name="cp" id="cp" pattern="[0-9]{5}" required>
-				</td>
-				<td>
-				<label for="ville">Ville :</label>
-				<input type="text" name="ville" id="ville" pattern="[a-zA-Z \-]+" required>
-				</td>
-				</tr>
-				<tr>
-				<td>
-				<label for="mdp">Mot de passe :</label>
-				<input type="password" name="mdp" id="mdp" required>
-				</td>
-				<td>
-				<label for="mdpConfirm">Confirmation :</label>
-				<input type="password" name="mdpConfirm" id="mdpConfirm" required>
-				</td>
-				</tr>		
-			</tbody>
-		</table>
-		<button type="button" onclick="saveAccount()">Créer</button>
-		<button type="button" onclick="cancel()">Annuler</button>
-	</form>
+	
+	
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Créer un compte</h4>
+	
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="pseudo" id="pseudo" class="form-control" placeholder="Pseudo" type="text" required>
+    </div>
+	
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="nom" id="nom" class="form-control" placeholder="Nom" type="text" pattern="[a-zA-Z -]+" required>
+    </div>
+    
+    	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="prenom" id="prenom" class="form-control" placeholder="Prénom" type="text" pattern="[a-zA-Z -]+" required>
+    </div>
+    
+    
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+        <input name="mail" id="mail" class="form-control" placeholder="Adresse mail" type="email" required>
+    </div>
+    
+    
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+		</div>
+    	<input name="tel" id="tel" class="form-control" placeholder="Numéro de téléphone" type="tel"  pattern="[0-9]{10}">
+    </div>
+    
+    
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="rue" id="rue" class="form-control" placeholder="Adresse" type="text" required>
+    </div>
+    
+    	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="cp" id="cp" class="form-control" placeholder="Code postal" type="text" required pattern="[0-9]{5}">
+    </div>
+    
+    	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input name="ville" id="ville" class="form-control" placeholder="Ville" type="text" required pattern="[a-zA-Z \-]+">
+    </div>
+    
+	
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input class="form-control" placeholder="Mot de passe" type="password" id="mdp" name="mdp" required>
+    </div>
+    
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input class="form-control" placeholder="Confirmation mot de passe" type="password" id="mdpConfirm" name="mdpConfirm" required>
+    </div>
+                                       
+    <div class="form-group">
+        <button type="button" onClick="saveAccount();" class="btn btn-primary btn-block"> Créer le compte </button>
+        <button type="button" onClick="cancel();" class="btn btn-danger btn-block"> Annuler </button>
+    </div>     
+    
+    <p class="text-center">Vous avez un compte ? <a href="<%=request.getContextPath()%>/connexion">Se connecter</a></p>                                                                 
+</article>
+</div>
+  	
 
-</body>
+
+			    </div>
+    		</div>
+    	</div>
+    </body>
 </html>

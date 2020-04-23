@@ -2,7 +2,7 @@
  * 
  */
 function cancel(){
-	 document.location.href='/Encheres/Acceuil';
+	 document.location.href='/Encheres/Accueil';
 }
 
 function saveAccount(){

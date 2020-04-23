@@ -61,7 +61,7 @@ public class ServletAccountRegister extends HttpServlet {
 
 				addUser(request, response);
 
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 
 				JOptionPane.showMessageDialog(null, "compte créé");
 
@@ -78,7 +78,7 @@ public class ServletAccountRegister extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} catch (BusinessException e) {
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/acceuil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 
 			JOptionPane.showMessageDialog(null, "compte créé");
 
