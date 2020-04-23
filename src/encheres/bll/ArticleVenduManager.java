@@ -104,4 +104,8 @@ public class ArticleVenduManager {
 			}
 		}
 	}
+
+	public void majPrix(int idArticle, int montant) throws BusinessException {
+		this.articleVenduDAO.majPrix(idArticle, montant);
+	}
 }

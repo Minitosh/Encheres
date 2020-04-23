@@ -1,15 +1,12 @@
 package encheres.dal;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import encheres.BusinessException;
 import encheres.bo.Utilisateur;
@@ -18,19 +15,20 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT_UTILISATEUR = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) values(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur = ?";
-	
+
 	private static final String SELECT_UTILISATEUR_NO = " SELECT " + "	u.no_utilisateur as noUtilisateur,"
 			+ "	u.pseudo," + "	u.nom," + "	u.prenom," + "	u.email," + "	u.telephone," + "	u.rue,"
 			+ "	u.code_postal as codePostal," + "	u.ville," + "	u.mot_de_passe as motDePasse," + "	u.credit,"
 			+ "	u.administrateur" + " FROM" + " UTILISATEURS u " + "WHERE u.no_utilisateur=?";
-	
-	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + " pseudo," + " email" + " FROM"
-			+ " UTILISATEURS";
 
-	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + " no_utilisateur as noUtilisateur,"
-			+ "	pseudo," + " nom," + " prenom," + "	email," + " telephone," + "	rue,"
-			+ "	code_postal as codePostal," + "	ville," + "	mot_de_passe as motDePasse," + " credit,"
-			+ "	administrateur" + " FROM" + " UTILISATEURS" + " WHERE email = ?";
+	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + " pseudo," + " email" + " FROM" + " UTILISATEURS";
+
+	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + " no_utilisateur as noUtilisateur," + "	pseudo,"
+			+ " nom," + " prenom," + "	email," + " telephone," + "	rue," + "	code_postal as codePostal," + "	ville,"
+			+ "	mot_de_passe as motDePasse," + " credit," + "	administrateur" + " FROM" + " UTILISATEURS"
+			+ " WHERE email = ?";
+
+	private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit =? WHERE no_utilisateur=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -174,13 +172,10 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
 		ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
 		PreparedStatement pstmt = null;
-		Connection cnx = null;
-		try {
-			// Etape1 -Charger ledriver jdbc
-			DriverManager.registerDriver(new SQLServerDriver());
-			// Etape2 -Connection
-			String url = "jdbc:sqlserver://localhost:1433;databasename=Test_Db";
-			cnx = DriverManager.getConnection(url, "sa", "Pa$$w0rd");
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			cnx.setAutoCommit(false);
 			pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -196,13 +191,34 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		} finally {
 			try {
 				pstmt.close();
-				cnx.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void decrediter(float montant, int idUser) throws BusinessException {
+
+		Utilisateur user = this.select(idUser);
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			cnx.setAutoCommit(false);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_CREDIT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setFloat(1, (user.getCredit() - montant));
+			pstmt.setInt(2, idUser);
+			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 }
