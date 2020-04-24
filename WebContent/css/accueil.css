@@ -61,8 +61,14 @@ body {
 	margin-top: 10px;
 }
 
-.filtres-supprimer {
+.filtres-nom-supprimer {
 	color: red;
+	visibility: hidden;
+}
+
+.filtres-categorie-supprimer {
+	color: red;
+	visibility: hidden;
 }
 
 .recherche-colonne {

@@ -64,20 +64,46 @@
 		  		<form method="POST">
 		  			<div class="col-sm filtres-colonne">
 		  				<input class="form-control" type="text" placeholder="Nom" name="Nom">
-		  				<c:if test="${!nom eq null && !nom eq \"\"}" var="result">
-							<button id="deleteNom" type="submit" class="btn btn-link filtres-supprimer" name="isNullNom">Supprimer le filtre</button>
-						</c:if>
-						<c:out value="${result}"/>
+		  					<button id="deleteNom" type="submit" class="btn btn-link filtres-nom-supprimer" onClick="<% %>" name="isNullNom">Supprimer le filtre</button>
+		  					<%
+				    		if(nom != null && nom != ""){
+				    			%>
+				    				<script type="text/javascript">
+				    					document.getElementById("deleteNom").style.visibility = "visible";
+				    				</script>
+				    			<%
+				    		}else{
+				    			%>
+				    				<script type="text/javascript">
+				    					document.getElementById("deleteNom").style.visibility = "hidden";
+				    				</script>
+			    				<%
+				    		}
+				    		%>
 				    	<select class="form-control filtres-select" id="categorieSelect" name="Categorie">
-				      		<option style="color: #AFAFAF;">Selectionnez une catégorie</option>
+				      		<option style="color: #AFAFAF;" value="">Selectionnez une catégorie</option>
 				      		<c:forEach var="c" items="${listeCategorie}">
 		  						<option>${c.getLibelle()}</option>
 		  			  		</c:forEach>
 				    	</select>
-				    	<c:if test="${categorie != null && categorie != \"\"}" var="result">
-							<button id="deleteCategorie" type="submit" class="btn btn-link filtres-supprimer" name="isNullCategorie">Supprimer le filtre</button>
-						</c:if>
-						<c:out value="${result}"/>
+				    	<button id="deleteCategorie" type="submit" class="btn btn-link filtres-categorie-supprimer" name="isNullCategorie">Supprimer le filtre</button>
+				    	<%
+				    		if(categorie != null && categorie != ""){
+				    			
+				    			%>
+			    				<script type="text/javascript">
+			    					document.getElementById("deleteCategorie").style.visibility = "visible";
+			    				</script>
+				    			<%
+				    			
+				    		}else{
+				    			%>
+			    				<script type="text/javascript">
+			    					document.getElementById("deleteCategorie").style.visibility = "hidden";
+			    				</script>
+			    				<%
+				    		}
+				    	%>
 			    	</div>
 			    	<div class="col-sm recherche-colonne">
 			      		<a href="<%=request.getContextPath()%>/Accueil"><button type="submit" class="btn btn-outline-info recherche-bouton">Rechercher</button></a>
