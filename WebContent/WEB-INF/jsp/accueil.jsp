@@ -111,22 +111,56 @@
 			    <div class="col-sm">
 			    </div>
 		  	</div>
-		  	<!-- <div class="row filtres-connecte-section">
-		  		<div class="col-sm filtres-connecte-colonne-achats">
-	  			  <input class="form-check-input" type="radio" name="Achats" id="achats" value="achats">
-				  <label class="form-check-label" for="achats">
-				    Achats
-				  </label>
-			    </div>
-			    <div class="col-sm filtres-connecte-colonne-ventes">
-		    	  <input class="form-check-input" type="radio" name="Ventes" id="ventes" value="ventes">
-				  <label class="form-check-label" for="ventes">
-				    Ventes
-				  </label>
-			    </div>
-			    <div class="col-sm">
-			    </div>
-		  	</div> -->
+		  	<%
+		  	if(request.getSession().getAttribute("sessionUtilisateur") != null){
+	    		%>
+	    			<div class="row filtres-connecte-section">
+				  		<div class="col-sm filtres-connecte-colonne-achats">
+			  			  	<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+							  Achats
+							</button>
+							<div class="col-sm filtres-connecte-colonne-achats-checks">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Check me out
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck2">
+							      <label class="form-check-label" for="gridCheck2">
+							        Check me out
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck3">
+							      <label class="form-check-label" for="gridCheck3">
+							        Check me out
+							      </label>
+							</div>
+					    </div>
+					    <div class="col-sm filtres-connecte-colonne-ventes">
+				    	  	<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+							  Ventes
+							</button>
+							<div class="col-sm filtres-connecte-colonne-ventes-checks">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Check me out
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Check me out
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Check me out
+							      </label>
+							</div>
+					    </div>
+					    <div class="col-sm">
+					    </div>
+					    <div class="col-sm">
+					    </div>
+		  			</div>
+	    		<%
+	    	}
+		  	%>
 		  	</form>
 		  	<div class="row encheres-section">
 			  	<%
