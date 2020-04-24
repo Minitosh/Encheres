@@ -84,9 +84,12 @@ Retrait retrait = retraitManager.selectionnerRetrait(article.getNoArticle());
 				<td><p><%=retrait.getRue()+" "+retrait.getCodePostal()+" "+retrait.getVille() %></p></td>
 			</tr>
 			<tr>
+			<form id="userForm" action="Utilisateur" method="GET">
 				<td></td>
 				<td><p >Vendeur :</p></td>
-				<td><p><%=vendeur.getPseudo() %></p></td>
+				<td><a  href="#" onclick="document.getElementById('userForm').submit();"><%=vendeur.getPseudo() %></a></td>
+				<input type="hidden" id="idVendeur" name="idVendeur" value="<%=vendeur.getNoUtilisateur()%>">
+				</form>
 			</tr>
 			<tr>
 			<%
