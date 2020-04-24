@@ -41,8 +41,7 @@
 			                <input class="form-control" type="password" id="motDePasse" name="motDePasse" value="" size="20" maxlength="20" />
 			                <div class="erreur">${form.erreurs['motDePasse']}</div>
 			                <br />
-			
-			                <input type="submit" value="Connexion" class="btn btn-outline-success replay" />
+			                <a><button type="submit" class="btn btn-outline-success replay">Connexion</button></a>
 			                <br />
 			                
 			                <c:if test="${!empty sessionScope.sessionUtilisateur}">
