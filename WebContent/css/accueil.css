@@ -176,3 +176,9 @@ footer p {
 	color: white;
 	padding-top: 201px;
 }
+
+.noLink
+{
+	color: white !important;
+	text-decoration: none !important;
+}

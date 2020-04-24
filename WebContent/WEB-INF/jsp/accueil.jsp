@@ -27,7 +27,7 @@
 		<div class="container-fluid header">
 			<div class="row header-text">
 			    <div class="col">
-			    	<h2>ENI-Enchères</h2>
+			    	<h2><a class="noLink" href="<%=request.getContextPath()%>">ENI-Enchères</a></h2>
 			    </div>
 			    <div class="col-6">
 			    </div>
