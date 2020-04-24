@@ -1,0 +1,6 @@
+/**
+ * 
+ */
+function openArticleView(idArticle){
+	
+}

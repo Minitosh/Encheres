@@ -78,7 +78,11 @@ public class UtilisateurManager {
 		}
 	}
 
-	public void decrediter(float montant, int idUser) throws BusinessException {
+	public void decrediter(int montant, int idUser) throws BusinessException {
 		this.utilisateurDAO.decrediter(montant, idUser);
+	}
+
+	public void crediter(int montant, int idUser) throws BusinessException {
+		this.utilisateurDAO.decrediter(-montant, idUser);
 	}
 }

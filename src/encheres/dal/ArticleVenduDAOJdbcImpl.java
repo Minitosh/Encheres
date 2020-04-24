@@ -1,13 +1,16 @@
 package encheres.dal;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import encheres.BusinessException;
+import encheres.EtatVente;
 import encheres.bo.ArticleVendu;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
@@ -98,7 +101,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			pstmt.setInt(1, noArticleVendu);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != articleVendu.getNoArticle()) {
+				if (rs.getInt("noArticle") != articleVendu.getNoArticle()) {
 					articleVendu = articleVenduBuilder(rs);
 				}
 			}
@@ -121,7 +124,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			pstmt.setString(1, nom);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (rs.getString("nom_article") != articleVendu.getNomArticle()) {
+				if (rs.getString("nomArticle") != articleVendu.getNomArticle()) {
 					articleVendu = articleVenduBuilder(rs);
 				}
 			}
@@ -131,6 +134,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			businessException.ajouterErreur(CodesResultatDAL.LECTURE_ARTICLE_VENDU_ECHEC);
 			throw businessException;
 		}
+
 		return articleVendu;
 	}
 
@@ -143,7 +147,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs = pstmt.executeQuery();
 			ArticleVendu articleVenduCourant = new ArticleVendu();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != articleVenduCourant.getNoArticle()) {
+				if (rs.getInt("noArticle") != articleVenduCourant.getNoArticle()) {
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);
 				}
@@ -167,7 +171,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs = pstmt.executeQuery();
 			ArticleVendu articleVenduCourant = new ArticleVendu();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != articleVenduCourant.getNoArticle()) {
+				if (rs.getInt("noArticle") != articleVenduCourant.getNoArticle()) {
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);
 				}
@@ -190,7 +194,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			ResultSet rs = pstmt.executeQuery();
 			ArticleVendu articleVenduCourant = new ArticleVendu();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != articleVenduCourant.getNoArticle()) {
+				if (rs.getInt("noArticle") != articleVenduCourant.getNoArticle()) {
 					articleVenduCourant = articleVenduBuilder(rs);
 					listeArticleVendu.add(articleVenduCourant);
 				}
@@ -243,6 +247,11 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		articleVendu.setPrixVente(rs.getInt("prixVente"));
 		articleVendu.setNoUtilisateur(rs.getInt("noUtilisateur"));
 		articleVendu.setNoCategorie(rs.getInt("noCategorie"));
+		if (articleVendu.getDateFinEncheres().after(new Date(new java.util.Date().getTime()))) {
+			articleVendu.setEtatVente(EtatVente.EN_COURS);
+		} else {
+			articleVendu.setEtatVente(EtatVente.TERMINE);
+		}
 		return articleVendu;
 	}
 
@@ -270,5 +279,22 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 			businessException.ajouterErreur(CodesResultatDAL.DELETE_OBJET_ECHEC);
 			throw businessException;
 		}
+	}
+
+	@Override
+	public void deleteToLate() throws BusinessException {
+
+		List<ArticleVendu> listeArticleVendu = selectAll();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new java.util.Date());
+		cal.add(Calendar.DATE, -7);
+		Date date = new Date(cal.getTimeInMillis());
+
+		for (ArticleVendu a : listeArticleVendu) {
+			if (a.getDateFinEncheres().before(date)) {
+				delete(a.getNoArticle());
+			}
+		}
+
 	}
 }

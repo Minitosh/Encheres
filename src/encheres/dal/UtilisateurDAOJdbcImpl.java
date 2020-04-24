@@ -87,7 +87,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			pstmt.setInt(1, noUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				if (rs.getInt("no_utilisateur") != utilisateur.getNoUtilisateur()) {
+				if (rs.getInt("noUtilisateur") != utilisateur.getNoUtilisateur()) {
 					utilisateur = utilisateurBuilder(rs);
 				}
 			}
@@ -200,7 +200,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void decrediter(float montant, int idUser) throws BusinessException {
+	public void decrediter(int montant, int idUser) throws BusinessException {
 
 		Utilisateur user = this.select(idUser);
 
@@ -208,7 +208,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 			cnx.setAutoCommit(false);
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_CREDIT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setFloat(1, (user.getCredit() - montant));
+			pstmt.setInt(1, (user.getCredit() - montant));
 			pstmt.setInt(2, idUser);
 			pstmt.executeUpdate();
 			pstmt.close();

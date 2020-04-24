@@ -21,4 +21,6 @@ public interface ArticleVenduDAO {
 	public void delete(int noArticleVendu) throws BusinessException;
 
 	public void majPrix(int idArticle, int montant) throws BusinessException;
+
+	public void deleteToLate() throws BusinessException;
 }

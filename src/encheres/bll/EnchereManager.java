@@ -42,6 +42,9 @@ public class EnchereManager {
 		} else {
 			throw new AddEnchereException("Erreur sur la date contacter un administrateur");
 		}
+		ArticleVenduManager article = new ArticleVenduManager();
+		UtilisateurManager user = new UtilisateurManager();
+		user.crediter(montantEnchere, article.selectionnerArticleVenduParNoArticleVendu(noArticle).getNoUtilisateur());
 
 		return enchere;
 	}
@@ -70,7 +73,14 @@ public class EnchereManager {
 		BusinessException businessException = new BusinessException();
 
 		if (!businessException.hasErreurs()) {
+			Enchere enchere = selectionnerEnchereParNoArticle(noArticle);
+			UtilisateurManager user = new UtilisateurManager();
+			user.crediter(enchere.getMontantEnchere(), enchere.getNoUtilisateur());
+			ArticleVenduManager article = new ArticleVenduManager();
+			user.decrediter(enchere.getMontantEnchere(),
+					article.selectionnerArticleVenduParNoArticleVendu(noArticle).getNoUtilisateur());
 			this.enchereDAO.delete(noArticle);
+
 		} else {
 			throw businessException;
 		}

@@ -40,7 +40,7 @@
 			<tr>
 				<td>
 				<label for="tel">Telephone :</label>
-				<input type="tel" name="tel" id="tel" pattern="[0-9]{5}" >
+				<input type="tel" name="tel" id="tel" pattern="[0-9]{10}" >
 				</td>
 				<td>
 				<label for="rue">Rue :</label>

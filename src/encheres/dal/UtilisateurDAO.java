@@ -19,6 +19,6 @@ public interface UtilisateurDAO {
 
 	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException;
 
-	public void decrediter(float montant, int idUser) throws BusinessException;
+	public void decrediter(int montant, int idUser) throws BusinessException;
 
 }

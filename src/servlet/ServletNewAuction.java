@@ -16,6 +16,7 @@ import encheres.Exceptions.AddEnchereException;
 import encheres.bll.ArticleVenduManager;
 import encheres.bll.EnchereManager;
 import encheres.bll.UtilisateurManager;
+import encheres.bo.Enchere;
 import encheres.bo.Utilisateur;
 
 /**
@@ -56,30 +57,44 @@ public class ServletNewAuction extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Utilisateur user = ((Utilisateur) request.getSession().getAttribute("sessionUtilisateur"));
+		Enchere enchere;
 		int idArticle = Integer.parseInt(request.getParameter("idArticle"));
 
-		int montant = Integer.parseInt(request.getParameter("montant"));
-
-		if (user.getCredit() < montant) {
-
-			RequestDispatcher rd = request.getRequestDispatcher(request.getContextPath());
-
-			JOptionPane.showMessageDialog(null, "Vous n'avez pas un solde suffisant");
+		if (request.getParameter("montant").contains(".")) {
+			JOptionPane.showMessageDialog(null, "Veuillez renseigner un montant supérieur a la dernière enchère");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Details.jsp");
 
 			rd.forward(request, response);
-
 		} else {
+			int montant = Integer.parseInt(request.getParameter("montant"));
 
-			try {
-				enchereManager.ajouterEnchere(idArticle, user.getNoUtilisateur(),
-						new Date(new java.util.Date().getTime()), montant);
-				userManager.decrediter(montant, user.getNoUtilisateur());
-				articleManager.majPrix(idArticle, montant);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-			} catch (AddEnchereException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-				e.printStackTrace();
+			if (user.getCredit() < montant) {
+
+				JOptionPane.showMessageDialog(null, "Vous n'avez pas un solde suffisant");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Details.jsp");
+
+				rd.forward(request, response);
+
+			} else {
+
+				try {
+
+					enchereManager.supprimerEnchere(idArticle);
+					enchereManager.ajouterEnchere(idArticle, user.getNoUtilisateur(),
+							new Date(new java.util.Date().getTime()), montant);
+					userManager.decrediter(montant, user.getNoUtilisateur());
+					articleManager.majPrix(idArticle, montant);
+
+				} catch (BusinessException e) {
+					e.printStackTrace();
+				} catch (AddEnchereException e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					e.printStackTrace();
+				}
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/Details.jsp");
+
+				rd.forward(request, response);
+
 			}
 		}
 	}

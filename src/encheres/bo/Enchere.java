@@ -11,6 +11,7 @@ public class Enchere implements Serializable {
 	private int montantEnchere;
 	private int noUtilisateur;
 	private int noArticle;
+	private ArticleVendu articleVendu;
 
 	public Date getDateEnchere() {
 		return dateEnchere;
@@ -20,7 +21,7 @@ public class Enchere implements Serializable {
 		this.dateEnchere = dateEnchere;
 	}
 
-	public float getMontantEnchere() {
+	public int getMontantEnchere() {
 		return montantEnchere;
 	}
 
@@ -44,22 +45,31 @@ public class Enchere implements Serializable {
 		this.noArticle = noArticle;
 	}
 
+	public ArticleVendu getArticleVendu() {
+		return articleVendu;
+	}
+
+	public void setArticleVendu(ArticleVendu articleVendu) {
+		this.articleVendu = articleVendu;
+	}
+
 	public Enchere() {
 
 	}
 
-	public Enchere(Date dateEnchere, int montantEnchere, int noUtilisateur, int noArticle) {
+	public Enchere(Date dateEnchere, int montantEnchere, int noUtilisateur, int noArticle, ArticleVendu articleVendu) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.noUtilisateur = noUtilisateur;
 		this.noArticle = noArticle;
+		this.articleVendu = articleVendu;
 	}
 
 	@Override
 	public String toString() {
 		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", noUtilisateur="
-				+ noUtilisateur + ", noArticle=" + noArticle + "]";
+				+ noUtilisateur + ", noArticle=" + noArticle + ", articleVendu=" + articleVendu + "]";
 	}
 
 }
