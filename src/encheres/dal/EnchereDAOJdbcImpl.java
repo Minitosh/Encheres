@@ -22,28 +22,28 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e";
-	private static final String SELECT_ENCHERE_UTILISATEUR = "	e.no_article as noArticle," + 
+	private static final String SELECT_ENCHERE_UTILISATEUR = "	SELECT e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
 			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.no_utilisateur = ?";
-	private static final String SELECT_ENCHERE_ARTICLE = "	e.no_article as noArticle," + 
+	private static final String SELECT_ENCHERE_ARTICLE = "	SELECT e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
 			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.no_article = ?";
-	private static final String SELECT_ENCHERE_DATE = "	e.no_article as noArticle," + 
+	private static final String SELECT_ENCHERE_DATE = " SELECT	e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
 			"	e.montant_enchere as montantEncheres" +
 			" FROM" + 
 			"	ENCHERES e" +
 			" WHERE e.date_enchere = ?";
-	private static final String SELECT_ENCHERE_PERIODE = "	e.no_article as noArticle," + 
+	private static final String SELECT_ENCHERE_PERIODE = "	SELECT e.no_article as noArticle," + 
 			"	e.no_utilisateur as noUtilisateur," +
 			"	e.date_enchere as dateEnchere," +
 			"	e.montant_enchere as montantEncheres" +
@@ -125,7 +125,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next())
 			{
-					if(rs.getInt("no_article")!=enchere.getNoArticle())
+					if(rs.getInt("noArticle")!=enchere.getNoArticle())
 					{
 						enchere = enchereBuilder(rs);
 					}
@@ -151,7 +151,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			Enchere enchereCourante=new Enchere();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=enchereCourante.getNoArticle())
+				if(rs.getInt("noArticle")!=enchereCourante.getNoArticle())
 				{
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
@@ -180,7 +180,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			Enchere enchereCourante=new Enchere();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=enchereCourante.getNoArticle())
+				if(rs.getInt("noArticle")!=enchereCourante.getNoArticle())
 				{
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
@@ -210,7 +210,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			Enchere enchereCourante=new Enchere();
 			while(rs.next())
 			{
-				if(rs.getInt("no_article")!=enchereCourante.getNoArticle())
+				if(rs.getInt("noArticle")!=enchereCourante.getNoArticle())
 				{
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);

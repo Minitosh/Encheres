@@ -33,7 +33,7 @@
 			    <%
 			    	if(request.getSession().getAttribute("sessionUtilisateur") == null){
 			    		%>
-			    			<a style="color:#33FFAC;" href="<%=request.getContextPath()%>/Connexion"><input class="btn btn-outline-success replay" type="button" value="Se Connecter/S'inscrire"/></a>
+			    			<a style="color:#33FFAC;" href="<%=request.getContextPath()%>/Connexion"><input class="btn btn-success" type="button" value="Se Connecter/S'inscrire"/></a>
 			    		<%
 			    	}else{
 			    		%>
@@ -49,7 +49,8 @@
 		  	<div class="row title-section">
 		  		<h1>Liste des enchères</h1>
 		  		<%
-		  			request.setAttribute("nom", "LOL");
+		  			String nom = request.getParameter("Nom");
+		  			String categorie = request.getParameter("Categorie");
 		  		%>
 		  	</div>
 		  	<div class="row filtres-title">
@@ -60,18 +61,34 @@
     			<div class="col"></div>
 		  	</div>
 		  	<div class="row filtres-section">
-		  		<div class="col-sm filtres-colonne">
-			      <input class="form-control" type="text" placeholder="Nom">
-				    <select class="form-control filtres-select" id="categorieSelect">
-				      <option style="color: #AFAFAF;">Selectionnez une catégorie</option>
-				      <c:forEach var="c" items="${listeCategorie}">
-		  					<option>${c.getLibelle()}</option>
-		  			  </c:forEach>
-				    </select>
-			    </div>
-			    <div class="col-sm recherche-colonne">
-			      <button type="button" class="btn btn-outline-info recherche-bouton">Rechercher</button>
-			    </div>
+		  		<form method="POST">
+		  			<div class="col-sm filtres-colonne">
+		  				<input class="form-control" type="text" placeholder="Nom" name="Nom">
+		  				<% System.out.println("Nom :");
+			  			System.out.println(nom); %>
+		  				<c:if test="${!nom eq null && !nom eq \"\"}" var="result">
+		  					<% System.out.println("Dans le if Nom"); %>
+							<button id="deleteNom" type="submit" class="btn btn-link filtres-supprimer" name="isNullNom">Supprimer le filtre</button>
+						</c:if>
+						<c:out value="${result}"/>
+				    	<select class="form-control filtres-select" id="categorieSelect" name="Categorie">
+				      		<option style="color: #AFAFAF;">Selectionnez une catégorie</option>
+				      		<c:forEach var="c" items="${listeCategorie}">
+		  						<option>${c.getLibelle()}</option>
+		  			  		</c:forEach>
+				    	</select>
+				    	<% System.out.println("Categorie :");
+			  			System.out.println(categorie); %>
+				    	<c:if test="${categorie != null && categorie != \"\"}" var="result">
+				    		<% System.out.println("Dans le if Cat"); %>
+							<button id="deleteCategorie" type="submit" class="btn btn-link filtres-supprimer" name="isNullCategorie">Supprimer le filtre</button>
+						</c:if>
+						<c:out value="${result}"/>
+			    	</div>
+			    	<div class="col-sm recherche-colonne">
+			      		<a href="<%=request.getContextPath()%>/Accueil"><button type="submit" class="btn btn-outline-info recherche-bouton">Rechercher</button></a>
+			    	</div>
+		  		</form>
 			    <div class="col-sm">
 			    </div>
 		  	</div>
