@@ -20,6 +20,16 @@
 <title>Enchère</title>
 </head>
 <body>
+<div class="container-fluid header">
+			<div class="row header-text" onclick="">
+			    <div class="col">
+			    <a href="<%=request.getContextPath()%>/Accueil">
+			    	<h2>ENI-Enchères</h2>
+			    </a>
+			    </div>
+			    <div class="col-6">
+			    </div>
+		  	</div>
 <h1>Détail vente</h1>
 <%
 ArticleVenduManager articleManager = new ArticleVenduManager();
