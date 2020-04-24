@@ -50,6 +50,7 @@ public class ServletMainPage extends HttpServlet {
 			List<Categorie> listeCategorie = new ArrayList<Categorie>();
 			List<ArticleVendu> listeArticleVendu = new ArrayList<ArticleVendu>();
 			
+			
 			if(request.getParameter("Categorie") != null && request.getParameter("Nom") != null && !request.getParameter("Categorie").equals("") && !request.getParameter("Nom").equals("")) {
 				Categorie categorie = categorieManager.selectionnerCategorieParLibelle(request.getParameter("Categorie"));
 				if(categorie.getLibelle() != null) {
