@@ -1,5 +1,9 @@
 package encheres.bll;
 
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import encheres.BusinessException;
 import encheres.bo.Utilisateur;
 import encheres.dal.DAOFactory;
@@ -8,15 +12,17 @@ import encheres.dal.UtilisateurDAO;
 public class UtilisateurManager {
 
 	private UtilisateurDAO utilisateurDAO;
-	
+
 	public UtilisateurManager() {
 		this.utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
-	
-	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String motDePasee, int credit, Boolean administrateur) throws BusinessException {
-		
+
+	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasee, int credit, Boolean administrateur)
+			throws BusinessException {
+
 		BusinessException businessException = new BusinessException();
-		
+
 		this.validerChampStr(pseudo, businessException);
 		this.validerChampStr(nom, businessException);
 		this.validerChampStr(prenom, businessException);
@@ -25,11 +31,11 @@ public class UtilisateurManager {
 		this.validerChampStr(codePostal, businessException);
 		this.validerChampStr(ville, businessException);
 		this.validerChampStr(motDePasee, businessException);
-		
+
 		Utilisateur utilisateur = null;
-		
-		if(!businessException.hasErreurs()) {
-			
+
+		if (!businessException.hasErreurs()) {
+
 			utilisateur = new Utilisateur();
 			utilisateur.setPseudo(pseudo);
 			utilisateur.setNom(nom);
@@ -42,42 +48,53 @@ public class UtilisateurManager {
 			utilisateur.setMotDePasse(motDePasee);
 			utilisateur.setCredit(credit);
 			utilisateur.setAdministrateur(administrateur);
-			
+
 			this.utilisateurDAO.insert(utilisateur);
-		}
-		else
-		{
+		} else {
 			throw businessException;
 		}
 		return utilisateur;
 	}
-	
+
 	public Utilisateur selectionnerUtilisateurParNo(int noUtilisateur) throws BusinessException {
-		
+
 		return this.utilisateurDAO.select(noUtilisateur);
 	}
-	
+
 	public Utilisateur selectionnerUtilisateurParEmail(String email) throws BusinessException {
-		
+
 		return this.utilisateurDAO.select(email);
 	}
-	
+
 	public void supprimerUtilisateur(int noUtilisateur) throws BusinessException {
 		BusinessException businessException = new BusinessException();
-		
-		if(!businessException.hasErreurs())
-		{	
+
+		if (!businessException.hasErreurs()) {
 			this.utilisateurDAO.delete(noUtilisateur);
-		}
-		else
-		{
+		} else {
 			throw businessException;
 		}
 	}
 
 	private void validerChampStr(String champ, BusinessException businessException) {
-		if(champ.length() == 0 || champ == null) {
+		if (champ.length() == 0 || champ == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_UTILISATEUR_ERREUR);
 		}
+	}
+
+	public void decrediter(int montant, int idUser) throws BusinessException {
+		this.utilisateurDAO.decrediter(montant, idUser);
+	}
+
+	public void crediter(int montant, int idUser) throws BusinessException {
+		this.utilisateurDAO.decrediter(-montant, idUser);
+	}
+
+	public ArrayList<ImmutablePair<String, String>> selectionnerTousLesEmailsPseudo() throws BusinessException {
+		return this.utilisateurDAO.getAllPseudoEmail();
+	}
+
+	public void modifierUtilisateur(Utilisateur user) {
+		this.utilisateurDAO.update(user);
 	}
 }

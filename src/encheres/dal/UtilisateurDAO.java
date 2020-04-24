@@ -8,11 +8,19 @@ import encheres.BusinessException;
 import encheres.bo.Utilisateur;
 
 public interface UtilisateurDAO {
-	
+
 	public void insert(Utilisateur utilisateur) throws BusinessException;
+
 	public Utilisateur select(int noUtilisateur) throws BusinessException;
+
 	public Utilisateur select(String email) throws BusinessException;
+
 	public void delete(int noUtilisateur) throws BusinessException;
+
 	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException;
+
+	public void decrediter(int montant, int idUser) throws BusinessException;
+
+	public void update(Utilisateur user);
 
 }

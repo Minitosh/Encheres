@@ -35,12 +35,13 @@
 			    <%
 			    	if(request.getSession().getAttribute("sessionUtilisateur") == null){
 			    		%>
-			    			<a style="color:#33FFAC;" href="<%=request.getContextPath()%>/Connexion"><input class="btn btn-outline-success replay" type="button" value="Se Connecter/S'inscrire"/></a>
+			    			<a style="color:#33FFAC;" href="<%=request.getContextPath()%>/Connexion"><input class="btn btn-success" type="button" value="Se Connecter/S'inscrire"/></a>
 			    		<%
 			    	}else{
 			    		%>
 			    			<img src="img/user.svg" class="user-image"/>
-			    			<p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Profil"><p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p></a>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/NouvelleVente"><input class="btn btn-success" type="button" value="Vendre"/></a>
 			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-danger" type="button" value="Déconnexion"/></a>
 			    		<%
 			    	}
@@ -51,7 +52,8 @@
 		  	<div class="row title-section">
 		  		<h1>Liste des enchères</h1>
 		  		<%
-		  			request.setAttribute("nom", "LOL");
+		  			String nom = request.getParameter("Nom");
+		  			String categorie = request.getParameter("Categorie");
 		  		%>
 		  	</div>
 		  	<div class="row filtres-title">
@@ -61,22 +63,108 @@
 		  		</div>
     			<div class="col"></div>
 		  	</div>
+		  	<form method="POST">
 		  	<div class="row filtres-section">
-		  		<div class="col-sm filtres-colonne">
-			      <input class="form-control" type="text" placeholder="Nom">
-				    <select class="form-control filtres-select" id="categorieSelect">
-				      <option style="color: #AFAFAF;">Selectionnez une catégorie</option>
-				      <c:forEach var="c" items="${listeCategorie}">
-		  					<option>${c.getLibelle()}</option>
-		  			  </c:forEach>
-				    </select>
-			    </div>
-			    <div class="col-sm recherche-colonne">
-			      <button type="button" class="btn btn-outline-info recherche-bouton">Rechercher</button>
-			    </div>
+		  			<div class="col-sm filtres-colonne">
+		  				<input class="form-control" type="text" placeholder="Nom" name="Nom">
+		  					<button id="deleteNom" type="submit" class="btn btn-link filtres-nom-supprimer" onClick="<% %>" name="isNullNom">Supprimer le filtre</button>
+		  					<%
+				    		if(nom != null && nom != ""){
+				    			%>
+				    				<script type="text/javascript">
+				    					document.getElementById("deleteNom").style.visibility = "visible";
+				    				</script>
+				    			<%
+				    		}else{
+				    			%>
+				    				<script type="text/javascript">
+				    					document.getElementById("deleteNom").style.visibility = "hidden";
+				    				</script>
+			    				<%
+				    		}
+				    		%>
+				    	<select class="form-control filtres-select" id="categorieSelect" name="Categorie">
+				      		<option style="color: #AFAFAF;" value="">Selectionnez une catégorie</option>
+				      		<c:forEach var="c" items="${listeCategorie}">
+		  						<option>${c.getLibelle()}</option>
+		  			  		</c:forEach>
+				    	</select>
+				    	<button id="deleteCategorie" type="submit" class="btn btn-link filtres-categorie-supprimer" name="isNullCategorie">Supprimer le filtre</button>
+				    	<%
+				    		if(categorie != null && categorie != ""){
+				    			
+				    			%>
+			    				<script type="text/javascript">
+			    					document.getElementById("deleteCategorie").style.visibility = "visible";
+			    				</script>
+				    			<%
+				    			
+				    		}else{
+				    			%>
+			    				<script type="text/javascript">
+			    					document.getElementById("deleteCategorie").style.visibility = "hidden";
+			    				</script>
+			    				<%
+				    		}
+				    	%>
+			    	</div>
+			    	<div class="col-sm recherche-colonne">
+			      		<a href="<%=request.getContextPath()%>/Accueil"><button type="submit" class="btn btn-outline-info recherche-bouton">Rechercher</button></a>
+			    	</div>
 			    <div class="col-sm">
 			    </div>
 		  	</div>
+		  	<%
+		  	if(request.getSession().getAttribute("sessionUtilisateur") != null){
+	    		%>
+	    			<div class="row filtres-connecte-section">
+				  		<div class="col-sm filtres-connecte-colonne-achats">
+			  			  	<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+							  Achats
+							</button>
+							<div class="col-sm filtres-connecte-colonne-achats-checks">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Enchères ouvertes
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck2">
+							      <label class="form-check-label" for="gridCheck2">
+							        Mes enchères en cours
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck3">
+							      <label class="form-check-label" for="gridCheck3">
+							        Mes enchères remportées
+							      </label>
+							</div>
+					    </div>
+					    <div class="col-sm filtres-connecte-colonne-ventes">
+				    	  	<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+							  Ventes
+							</button>
+							<div class="col-sm filtres-connecte-colonne-ventes-checks">
+								<input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Mes ventes en cours
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Ventes non débutées
+							      </label>
+							      <input class="form-check-input" type="checkbox" id="gridCheck">
+							      <label class="form-check-label" for="gridCheck">
+							        Ventes terminées
+							      </label>
+							</div>
+					    </div>
+					    <div class="col-sm">
+					    </div>
+					    <div class="col-sm">
+					    </div>
+		  			</div>
+	    		<%
+	    	}
+		  	%>
+		  	</form>
 		  	<div class="row encheres-section">
 			  	<%
 					List<Enchere> listeEnchere = (List<Enchere>) request.getAttribute("listeEnchere");
@@ -86,16 +174,20 @@
 			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
 			  				CategorieManager categorieManager = new CategorieManager();
 				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
-				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(e.getNoUtilisateur());
+				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(a.getNoUtilisateur());
 				  			Categorie c = categorieManager.selectionnerCategorieParNo(a.getNoCategorie());
-				  			%>
-			  					<div class="enchere" id="${a.getNoArticle()}" onclick="">
-				  					<h5><strong><%=a.getNomArticle()%></strong></h5>
-				  					<p class="enchere-prix"><%=a.getMiseAPrix()%> crédits</p>
+				  			%>	
+				  				<form id="enchereForm<%=a.getNoArticle()%>"
+										action="Enchere" method="POST">
+			  					<div class="enchere" id="<%=a.getNoArticle()%>" onclick="document.getElementById('enchereForm<%=a.getNoArticle()%>').submit();">
+				  					<h5 ><strong><%=a.getNomArticle()%></strong></h5>
+				  					<p class="enchere-prix"><%=a.getPrixVente()%> crédits</p>
 				  					<p class="enchere-categorie"><%=c.getLibelle()%></p>
 				  					<p>Fin de l'enchère : <fmt:formatDate value="<%=a.getDateFinEncheres()%>" pattern="dd/MM/yyyy" /></p>
 				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
+				  					<input type="hidden" id="idArticle" name="idArticle" value="<%=a.getNoArticle()%>">
 			  					</div>
+			  					</form>
 				  			<%
 				  		}	
 			  		}

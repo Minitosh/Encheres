@@ -1,15 +1,12 @@
 package encheres.dal;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
-
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import encheres.BusinessException;
 import encheres.bo.Utilisateur;
@@ -18,19 +15,21 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT_UTILISATEUR = "insert into utilisateurs(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur) values(?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur = ?";
-	
+
 	private static final String SELECT_UTILISATEUR_NO = " SELECT " + "	u.no_utilisateur as noUtilisateur,"
 			+ "	u.pseudo," + "	u.nom," + "	u.prenom," + "	u.email," + "	u.telephone," + "	u.rue,"
 			+ "	u.code_postal as codePostal," + "	u.ville," + "	u.mot_de_passe as motDePasse," + "	u.credit,"
 			+ "	u.administrateur" + " FROM" + " UTILISATEURS u " + "WHERE u.no_utilisateur=?";
-	
-	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + " pseudo," + " email" + " FROM"
-			+ " UTILISATEURS";
 
-	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + " no_utilisateur as noUtilisateur,"
-			+ "	pseudo," + " nom," + " prenom," + "	email," + " telephone," + "	rue,"
-			+ "	code_postal as codePostal," + "	ville," + "	mot_de_passe as motDePasse," + " credit,"
-			+ "	administrateur" + " FROM" + " UTILISATEURS" + " WHERE email = ?";
+	private static final String SELECT_PSEUDO_EMAIL = " SELECT " + " pseudo," + " email" + " FROM" + " UTILISATEURS";
+
+	private static final String SELECT_UTILISATEUR_EMAIL = " SELECT " + " no_utilisateur as noUtilisateur," + "	pseudo,"
+			+ " nom," + " prenom," + "	email," + " telephone," + "	rue," + "	code_postal as codePostal," + "	ville,"
+			+ "	mot_de_passe as motDePasse," + " credit," + "	administrateur" + " FROM" + " UTILISATEURS"
+			+ " WHERE email = ?";
+
+	private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit =? WHERE no_utilisateur=?";
+	private static final String UPDATE_USER = "UPDATE UTILISATEURS  SET pseudo = ?,nom = ?,prenom = ?,email = ? ,telephone = ?,rue =?,code_postal = ?,ville = ?,mot_de_passe = ?,credit = ?,administrateur = ? WHERE no_utilisateur=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -171,38 +170,84 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-    public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
-        ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
-        PreparedStatement pstmt = null;
+	public ArrayList<ImmutablePair<String, String>> getAllPseudoEmail() throws BusinessException {
+		ArrayList<ImmutablePair<String, String>> list = new ArrayList<ImmutablePair<String, String>>();
+		PreparedStatement pstmt = null;
 
- 
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 
-        try (Connection cnx = ConnectionProvider.getConnection()) {
+			cnx.setAutoCommit(false);
+			pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				list.add(new ImmutablePair<>(rs.getString("pseudo"), rs.getString("email")));
+			}
+			pstmt.close();
+			cnx.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
+			throw businessException;
+		} finally {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
 
- 
+	@Override
+	public void decrediter(int montant, int idUser) throws BusinessException {
 
-            cnx.setAutoCommit(false);
-            pstmt = cnx.prepareStatement(SELECT_PSEUDO_EMAIL);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                list.add(new ImmutablePair<>(rs.getString("pseudo"), rs.getString("email")));
-            }
-            pstmt.close();
-            cnx.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            BusinessException businessException = new BusinessException();
-            businessException.ajouterErreur(CodesResultatDAL.LECTURE_UTILISATEUR_ECHEC);
-            throw businessException;
-        } finally {
-            try {
-                pstmt.close();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        return list;
-    }
+		Utilisateur user = this.select(idUser);
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			cnx.setAutoCommit(false);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_CREDIT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setInt(1, (user.getCredit() - montant));
+			pstmt.setInt(2, idUser);
+			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	@Override
+	public void update(Utilisateur user) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			cnx.setAutoCommit(false);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getPseudo());
+			pstmt.setString(2, user.getNom());
+			pstmt.setString(3, user.getPrenom());
+			pstmt.setString(4, user.getEmail());
+			pstmt.setString(5, user.getTelephone());
+			pstmt.setString(6, user.getRue());
+			pstmt.setString(7, user.getCodePostal());
+			pstmt.setString(8, user.getVille());
+			pstmt.setString(9, user.getMotDePasse());
+			pstmt.setFloat(10, user.getCredit());
+			pstmt.setBoolean(11, user.getAdministrateur());
+			pstmt.setInt(12, user.getNoUtilisateur());
+			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 }
