@@ -122,15 +122,15 @@
 							<div class="col-sm filtres-connecte-colonne-achats-checks">
 								<input class="form-check-input" type="checkbox" id="gridCheck">
 							      <label class="form-check-label" for="gridCheck">
-							        Check me out
+							        Enchères ouvertes
 							      </label>
 							      <input class="form-check-input" type="checkbox" id="gridCheck2">
 							      <label class="form-check-label" for="gridCheck2">
-							        Check me out
+							        Mes enchères en cours
 							      </label>
 							      <input class="form-check-input" type="checkbox" id="gridCheck3">
 							      <label class="form-check-label" for="gridCheck3">
-							        Check me out
+							        Mes enchères remportées
 							      </label>
 							</div>
 					    </div>
@@ -141,15 +141,15 @@
 							<div class="col-sm filtres-connecte-colonne-ventes-checks">
 								<input class="form-check-input" type="checkbox" id="gridCheck">
 							      <label class="form-check-label" for="gridCheck">
-							        Check me out
+							        Mes ventes en cours
 							      </label>
 							      <input class="form-check-input" type="checkbox" id="gridCheck">
 							      <label class="form-check-label" for="gridCheck">
-							        Check me out
+							        Ventes non débutées
 							      </label>
 							      <input class="form-check-input" type="checkbox" id="gridCheck">
 							      <label class="form-check-label" for="gridCheck">
-							        Check me out
+							        Ventes terminées
 							      </label>
 							</div>
 					    </div>
