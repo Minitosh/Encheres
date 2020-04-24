@@ -64,10 +64,7 @@
 		  		<form method="POST">
 		  			<div class="col-sm filtres-colonne">
 		  				<input class="form-control" type="text" placeholder="Nom" name="Nom">
-		  				<% System.out.println("Nom :");
-			  			System.out.println(nom); %>
 		  				<c:if test="${!nom eq null && !nom eq \"\"}" var="result">
-		  					<% System.out.println("Dans le if Nom"); %>
 							<button id="deleteNom" type="submit" class="btn btn-link filtres-supprimer" name="isNullNom">Supprimer le filtre</button>
 						</c:if>
 						<c:out value="${result}"/>
@@ -77,10 +74,7 @@
 		  						<option>${c.getLibelle()}</option>
 		  			  		</c:forEach>
 				    	</select>
-				    	<% System.out.println("Categorie :");
-			  			System.out.println(categorie); %>
 				    	<c:if test="${categorie != null && categorie != \"\"}" var="result">
-				    		<% System.out.println("Dans le if Cat"); %>
 							<button id="deleteCategorie" type="submit" class="btn btn-link filtres-supprimer" name="isNullCategorie">Supprimer le filtre</button>
 						</c:if>
 						<c:out value="${result}"/>

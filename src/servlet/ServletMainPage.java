@@ -52,10 +52,19 @@ public class ServletMainPage extends HttpServlet {
 			
 			if(request.getParameter("Categorie") != null && request.getParameter("Nom") != null && !request.getParameter("Categorie").equals("") && !request.getParameter("Nom").equals("")) {
 				Categorie categorie = categorieManager.selectionnerCategorieParLibelle(request.getParameter("Categorie"));
-				listeArticleVendu = articleVenduManager.selectionnerTousLesArticleVenduParNoCategorie(categorie.getNoCategorie());
-				for(ArticleVendu a : listeArticleVendu) {
-					if(a.getNomArticle().contains(request.getParameter("Nom"))) {
-						listeEnchere.add(enchereManager.selectionnerEnchereParNoArticle(a.getNoArticle()));
+				if(categorie.getLibelle() != null) {
+					listeArticleVendu = articleVenduManager.selectionnerTousLesArticleVenduParNoCategorie(categorie.getNoCategorie());
+					for(ArticleVendu a : listeArticleVendu) {
+						if(a.getNomArticle().contains(request.getParameter("Nom"))) {
+							listeEnchere.add(enchereManager.selectionnerEnchereParNoArticle(a.getNoArticle()));
+						}
+					}
+				} else {
+					listeArticleVendu = articleVenduManager.selectionnerTousLesArticleVendu();
+					for(ArticleVendu a : listeArticleVendu) {
+						if(a.getNomArticle().contains(request.getParameter("Nom"))) {
+							listeEnchere.add(enchereManager.selectionnerEnchereParNoArticle(a.getNoArticle()));
+						}
 					}
 				}
 			}else {
