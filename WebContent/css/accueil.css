@@ -86,6 +86,42 @@ body {
     flex-direction: column;
 }
 
+.filtres-connecte-colonne-achats button {
+	background-color: #FFFFFF;
+	border-color: #17a2b8;
+	color: #17a2b8;
+}
+
+.filtres-connecte-colonne-ventes button {
+	background-color: #FFFFFF;
+	border-color: #17a2b8;
+	color: #17a2b8;
+}
+
+.filtres-connecte-colonne-achats button:hover {
+	background-color: #17a2b8;
+	color: #FFFFFF;
+}
+
+.filtres-connecte-colonne-ventes button:hover {
+	background-color: #17a2b8;
+	color: #FFFFFF;
+}
+
+.filtres-connecte-colonne-achats-checks {
+	display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-left: 60px;
+}
+
+.filtres-connecte-colonne-ventes-checks {
+	display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    padding-left: 60px;
+}
+
 .recherche-colonne {
 	display: flex;
 }
