@@ -1,0 +1,3 @@
+$("#pres").css({
+"color": "red"
+});

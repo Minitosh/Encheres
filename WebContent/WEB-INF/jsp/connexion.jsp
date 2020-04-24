@@ -7,12 +7,13 @@
 		<link rel="stylesheet" type="text/css" href="css/connexion.css">
         <meta charset="utf-8" />
         <title>Connexion</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link type="text/css" rel="stylesheet" href="form.css" />
     </head>
     <body>
     	<div class="container-fluid content">
     		<div class="row content">
-    			<div class="col colonne">
+    			<div class="col-md">
 			      <div class="content-left">
 		    		<form method="post" action="connexion">
 			            <fieldset>
@@ -24,7 +25,7 @@
 		        	</form>
 	    		  </div>
 			    </div>
-			    <div class="col colonne">
+			    <div class="col-md">
 			      <div class="content-right">
 		    		<form method="post" action="connexion">
 			            <fieldset>
