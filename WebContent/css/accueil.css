@@ -71,6 +71,21 @@ body {
 	visibility: hidden;
 }
 
+.filtres-connecte-section {
+	text-align: left;
+	padding: 45px;
+}
+
+.filtres-connecte-colonne-achats {
+	display: flex;
+    flex-direction: column;
+}
+
+.filtres-connecte-colonne-ventes {
+	display: flex;
+    flex-direction: column;
+}
+
 .recherche-colonne {
 	display: flex;
 }

@@ -61,8 +61,8 @@
 		  		</div>
     			<div class="col"></div>
 		  	</div>
+		  	<form method="POST">
 		  	<div class="row filtres-section">
-		  		<form method="POST">
 		  			<div class="col-sm filtres-colonne">
 		  				<input class="form-control" type="text" placeholder="Nom" name="Nom">
 		  					<button id="deleteNom" type="submit" class="btn btn-link filtres-nom-supprimer" onClick="<% %>" name="isNullNom">Supprimer le filtre</button>
@@ -109,10 +109,26 @@
 			    	<div class="col-sm recherche-colonne">
 			      		<a href="<%=request.getContextPath()%>/Accueil"><button type="submit" class="btn btn-outline-info recherche-bouton">Rechercher</button></a>
 			    	</div>
-		  		</form>
 			    <div class="col-sm">
 			    </div>
 		  	</div>
+		  	<!-- <div class="row filtres-connecte-section">
+		  		<div class="col-sm filtres-connecte-colonne-achats">
+	  			  <input class="form-check-input" type="radio" name="Achats" id="achats" value="achats">
+				  <label class="form-check-label" for="achats">
+				    Achats
+				  </label>
+			    </div>
+			    <div class="col-sm filtres-connecte-colonne-ventes">
+		    	  <input class="form-check-input" type="radio" name="Ventes" id="ventes" value="ventes">
+				  <label class="form-check-label" for="ventes">
+				    Ventes
+				  </label>
+			    </div>
+			    <div class="col-sm">
+			    </div>
+		  	</div> -->
+		  	</form>
 		  	<div class="row encheres-section">
 			  	<%
 					List<Enchere> listeEnchere = (List<Enchere>) request.getAttribute("listeEnchere");

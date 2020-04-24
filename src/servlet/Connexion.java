@@ -91,7 +91,8 @@ public class Connexion extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+//			this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+			response.sendRedirect(request.getContextPath() + "/Accueil");
 		}
 	}
 
