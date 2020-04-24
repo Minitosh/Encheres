@@ -11,6 +11,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     </head>
     <body>
+    <div class="container-fluid header">
+			<div class="row header-text" onclick="">
+			    <div class="col">
+			    <a href="<%=request.getContextPath()%>/Accueil">
+			    	<h2>ENI-Enchères</h2>
+			    </a>
+			    </div>
+			    <div class="col-6">
+			    </div>
+		  	</div>
     	<div class="container-fluid content">
     		<div class="row content">
     			<div class="col-md-6 col-sm offset-md-3">
@@ -111,6 +121,7 @@
 
 			    </div>
     		</div>
+    	</div>
     	</div>
     </body>
 </html>

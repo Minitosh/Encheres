@@ -32,7 +32,7 @@ function saveArticle(){
 		if(cat.value != "-- Categories --"){
 			cat.removeAttribute('style');
 			if(confirm('Voulez-vous vendre setArticle ? ')){
-				accountInfoRegister.submit();
+				newSaleRegister.submit();
 			}
 		}else {
 			cat.setAttribute('style','border-color: red;');

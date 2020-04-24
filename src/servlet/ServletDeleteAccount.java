@@ -2,7 +2,6 @@ package servlet;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,27 +56,25 @@ public class ServletDeleteAccount extends HttpServlet {
 
 		try {
 			if (!enchere.selectionnerEnchereParNoUtilisateur(idUser).isEmpty()) {
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 
 				JOptionPane.showMessageDialog(null, ERROR_ENCHERE);
 
-				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/Accueil");
 
 			} else {
 				if (!article.selectionnerTousLesArticleVenduParNoUtilisateur(idUser).isEmpty()) {
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 
 					JOptionPane.showMessageDialog(null, ERROR_VENTE);
 
-					rd.forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/Accueil");
 				} else {
 					user.supprimerUtilisateur(idUser);
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/jsp/accueil.jsp");
 
 					JOptionPane.showMessageDialog(null, NO_ERROR);
 					request.getSession().setAttribute(ATT_SESSION_USER, null);
 
-					rd.forward(request, response);
+					response.sendRedirect(request.getContextPath() + "/Accueil");
+
 				}
 			}
 		} catch (BusinessException e) {

@@ -64,12 +64,9 @@ public class ServletNewSale extends HttpServlet {
 		// TODO Auto-generated method stub
 		addArticleVendu(request);
 
-		RequestDispatcher rd = request.getRequestDispatcher("/Acceuil");
-
 		JOptionPane.showMessageDialog(null, "Enchère créé");
 
-		rd.forward(request, response);
-
+		response.sendRedirect(request.getContextPath() + "/Accueil");
 	}
 
 	private void addArticleVendu(HttpServletRequest request) {
@@ -99,7 +96,7 @@ public class ServletNewSale extends HttpServlet {
 
 		ArticleVendu a;
 		try {
-			a = articleManager.ajouterArticleVendu(nom, descr, debut, fin, prix, 0, idUser, idCat);
+			a = articleManager.ajouterArticleVendu(nom, descr, debut, fin, prix, prix, idUser, idCat);
 			retraitManager.ajouterRetrait(a.getNoArticle(), rue, cp, ville);
 		} catch (BusinessException e) {
 			JOptionPane.showMessageDialog(null, "Erreur lors de l'ajout veuillez contacter l'administrateur");

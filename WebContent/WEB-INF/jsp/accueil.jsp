@@ -23,9 +23,11 @@
 	<body>
 		<!-- <h1>${sessionScope.sessionUtilisateur.prenom} ? Bienvenue, ${sessionScope.sessionUtilisateur.prenom} :  </h1> -->
 		<div class="container-fluid header">
-			<div class="row header-text">
+			<div class="row header-text" onclick="">
 			    <div class="col">
+			    <a href="<%=request.getContextPath()%>/Accueil">
 			    	<h2>ENI-Enchères</h2>
+			    </a>
 			    </div>
 			    <div class="col-6">
 			    </div>
@@ -165,13 +167,12 @@
 		  	</form>
 		  	<div class="row encheres-section">
 			  	<%
-					List<Enchere> listeEnchere = (List<Enchere>) request.getAttribute("listeEnchere");
-			  		if(listeEnchere!=null && listeEnchere.size()>0){
-			  			for (Enchere e : listeEnchere){
+					List<ArticleVendu> listeArticle = (List<ArticleVendu>) request.getAttribute("listeArticleVendu");
+			  		if(listeArticle!=null && listeArticle.size()>0){
+			  			for (ArticleVendu a : listeArticle){
 			  				ArticleVenduManager articleVenduManager = new ArticleVenduManager();
 			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
 			  				CategorieManager categorieManager = new CategorieManager();
-				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
 				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(a.getNoUtilisateur());
 				  			Categorie c = categorieManager.selectionnerCategorieParNo(a.getNoCategorie());
 				  			%>	
