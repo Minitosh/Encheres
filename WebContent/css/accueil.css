@@ -44,6 +44,10 @@ body {
 	padding: 45px;
 }
 
+.filtres-section form {
+	display: contents;
+}
+
 .filtres-colonne {
 	display: flex;
     flex-direction: column;
@@ -57,12 +61,17 @@ body {
 	margin-top: 10px;
 }
 
+.filtres-supprimer {
+	color: red;
+}
+
 .recherche-colonne {
 	display: flex;
 }
 
 .recherche-bouton {
 	width: 200px;
+	height: 100%;
 }
 
 .encheres-section {

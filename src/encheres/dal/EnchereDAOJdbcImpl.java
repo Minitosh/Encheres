@@ -31,7 +31,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			+ "	e.no_utilisateur as noUtilisateur," + "	e.date_enchere as dateEnchere,"
 			+ "	e.montant_enchere as montantEncheres" + " FROM" + "	ENCHERES e"
 			+ " WHERE e.date_enchere BETWEEN ? AND ?";
-
 	@Override
 	public void insert(Enchere enchere) throws BusinessException {
 		// TODO Auto-generated method stub
@@ -99,10 +98,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 					PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, noArticle);
 			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				if (rs.getInt("noArticle") != enchere.getNoArticle()) {
-					enchere = enchereBuilder(rs);
-				}
+			while(rs.next())
+			{
+					if(rs.getInt("noArticle")!=enchere.getNoArticle())
+					{
+						enchere = enchereBuilder(rs);
+					}
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -170,9 +172,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			pstmt.setDate(1, dateDebut);
 			pstmt.setDate(2, dateFin);
 			ResultSet rs = pstmt.executeQuery();
-			Enchere enchereCourante = new Enchere();
-			while (rs.next()) {
-				if (rs.getInt("no_article") != enchereCourante.getNoArticle()) {
+			Enchere enchereCourante=new Enchere();
+			while(rs.next())
+			{
+				if(rs.getInt("noArticle")!=enchereCourante.getNoArticle())
+				{
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
 				}
