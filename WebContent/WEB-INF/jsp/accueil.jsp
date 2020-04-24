@@ -9,12 +9,14 @@
 <%@page import="encheres.bo.Categorie"%>
 <%@page import="encheres.bo.Enchere"%>
 <%@page import="encheres.bo.Utilisateur"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="css/accueil.css">
 		<meta charset="ISO-8859-1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<title>Accueil</title>
 		<%
 				List<Categorie> listeCategorie = (List<Categorie>) request.getAttribute("listeCategorie");
@@ -91,7 +93,7 @@
 				  					<h5><strong><%=a.getNomArticle()%></strong></h5>
 				  					<p class="enchere-prix"><%=a.getMiseAPrix()%> crédits</p>
 				  					<p class="enchere-categorie"><%=c.getLibelle()%></p>
-				  					<p>Fin de l'enchère : <%=a.getDateFinEncheres()%></p>
+				  					<p>Fin de l'enchère : <fmt:formatDate value="<%=a.getDateFinEncheres()%>" pattern="dd/MM/yyyy" /></p>
 				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
 			  					</div>
 				  			<%
