@@ -14,9 +14,8 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import encheres.BusinessException;
+import encheres.bll.UtilisateurManager;
 import encheres.bo.Utilisateur;
-import encheres.dal.DAOFactory;
-import encheres.dal.UtilisateurDAO;
 
 /**
  * Servlet implementation class ServletAccountRegister
@@ -25,7 +24,7 @@ import encheres.dal.UtilisateurDAO;
 public class ServletAccountRegister extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	private UtilisateurDAO userDAO;
+	private UtilisateurManager userDAO;
 	private String msg;
 	private boolean isPseudoDuplicate;
 	private boolean isEmailDuplicate;
@@ -35,7 +34,7 @@ public class ServletAccountRegister extends HttpServlet {
 	 */
 	public ServletAccountRegister() {
 		super();
-		userDAO = DAOFactory.getUtilisateurDAO();
+		userDAO = new UtilisateurManager();
 		isPseudoDuplicate = false;
 		isEmailDuplicate = false;
 	}
@@ -92,7 +91,7 @@ public class ServletAccountRegister extends HttpServlet {
 		isEmailDuplicate = false;
 		isPseudoDuplicate = false;
 		Boolean isPseudoExist = false;
-		ArrayList<ImmutablePair<String, String>> list = userDAO.getAllPseudoEmail();
+		ArrayList<ImmutablePair<String, String>> list = userDAO.selectionnerTousLesEmailsPseudo();
 		for (ImmutablePair<String, String> p : list) {
 			if (p.left.equals(pseudo)) {
 				msg = "Ce pseudo est déjà utilisé";
@@ -124,7 +123,9 @@ public class ServletAccountRegister extends HttpServlet {
 		Utilisateur user = new Utilisateur(pseudo, nom, prenom, email, tel, rue, cp, ville, mdp, 0, false);
 
 		try {
-			userDAO.insert(user);
+			userDAO.ajouterUtilisateur(user.getPseudo(), user.getNom(), user.getPrenom(), user.getEmail(),
+					user.getTelephone(), user.getRue(), user.getCodePostal(), user.getVille(), user.getMotDePasse(),
+					user.getCredit(), user.getAdministrateur());
 		} catch (BusinessException e) {
 
 			e.printStackTrace();

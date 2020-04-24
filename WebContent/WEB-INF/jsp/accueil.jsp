@@ -38,7 +38,8 @@
 			    	}else{
 			    		%>
 			    			<img src="img/user.svg" class="user-image"/>
-			    			<p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Profil"><p style="margin-left: 10px" >Bonjour, <strong>${sessionScope.sessionUtilisateur.prenom}</strong></p></a>
+			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/NouvelleVente"><input class="btn btn-success" type="button" value="Vendre"/></a>
 			    			<a style="margin-left: 10px" href="<%=request.getContextPath()%>/Deconnexion"><input class="btn btn-danger" type="button" value="Déconnexion"/></a>
 			    		<%
 			    	}

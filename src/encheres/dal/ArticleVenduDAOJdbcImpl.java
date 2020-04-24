@@ -11,6 +11,7 @@ import java.util.List;
 
 import encheres.BusinessException;
 import encheres.EtatVente;
+import encheres.bll.EnchereManager;
 import encheres.bo.ArticleVendu;
 
 public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
@@ -191,6 +192,7 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 		List<ArticleVendu> listeArticleVendu = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ARTICLE_VENDU_UTILISATEUR);
+			pstmt.setInt(1, noUtilisateur);
 			ResultSet rs = pstmt.executeQuery();
 			ArticleVendu articleVenduCourant = new ArticleVendu();
 			while (rs.next()) {
@@ -292,6 +294,8 @@ public class ArticleVenduDAOJdbcImpl implements ArticleVenduDAO {
 
 		for (ArticleVendu a : listeArticleVendu) {
 			if (a.getDateFinEncheres().before(date)) {
+				EnchereManager enchere = new EnchereManager();
+				enchere.supprimerEnchere(a.getNoArticle());
 				delete(a.getNoArticle());
 			}
 		}

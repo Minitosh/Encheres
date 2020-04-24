@@ -21,4 +21,6 @@ public interface UtilisateurDAO {
 
 	public void decrediter(int montant, int idUser) throws BusinessException;
 
+	public void update(Utilisateur user);
+
 }

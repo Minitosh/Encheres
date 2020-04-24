@@ -1,5 +1,9 @@
 package encheres.bll;
 
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import encheres.BusinessException;
 import encheres.bo.Utilisateur;
 import encheres.dal.DAOFactory;
@@ -84,5 +88,13 @@ public class UtilisateurManager {
 
 	public void crediter(int montant, int idUser) throws BusinessException {
 		this.utilisateurDAO.decrediter(-montant, idUser);
+	}
+
+	public ArrayList<ImmutablePair<String, String>> selectionnerTousLesEmailsPseudo() throws BusinessException {
+		return this.utilisateurDAO.getAllPseudoEmail();
+	}
+
+	public void modifierUtilisateur(Utilisateur user) {
+		this.utilisateurDAO.update(user);
 	}
 }

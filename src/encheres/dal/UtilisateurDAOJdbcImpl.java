@@ -29,6 +29,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			+ " WHERE email = ?";
 
 	private static final String UPDATE_CREDIT = "UPDATE UTILISATEURS SET credit =? WHERE no_utilisateur=?";
+	private static final String UPDATE_USER = "UPDATE UTILISATEURS  SET pseudo = ?,nom = ?,prenom = ?,email = ? ,telephone = ?,rue =?,code_postal = ?,ville = ?,mot_de_passe = ?,credit = ?,administrateur = ? WHERE no_utilisateur=?";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -219,6 +220,34 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void update(Utilisateur user) {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+
+			cnx.setAutoCommit(false);
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_USER, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, user.getPseudo());
+			pstmt.setString(2, user.getNom());
+			pstmt.setString(3, user.getPrenom());
+			pstmt.setString(4, user.getEmail());
+			pstmt.setString(5, user.getTelephone());
+			pstmt.setString(6, user.getRue());
+			pstmt.setString(7, user.getCodePostal());
+			pstmt.setString(8, user.getVille());
+			pstmt.setString(9, user.getMotDePasse());
+			pstmt.setFloat(10, user.getCredit());
+			pstmt.setBoolean(11, user.getAdministrateur());
+			pstmt.setInt(12, user.getNoUtilisateur());
+			pstmt.executeUpdate();
+			pstmt.close();
+			cnx.commit();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

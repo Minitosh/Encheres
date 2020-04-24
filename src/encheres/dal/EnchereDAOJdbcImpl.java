@@ -123,7 +123,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = pstmt.executeQuery();
 			Enchere enchereCourante = new Enchere();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != enchereCourante.getNoArticle()) {
+				if (rs.getInt("noArticle") != enchereCourante.getNoArticle()) {
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
 				}
@@ -147,7 +147,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO {
 			ResultSet rs = pstmt.executeQuery();
 			Enchere enchereCourante = new Enchere();
 			while (rs.next()) {
-				if (rs.getInt("no_article") != enchereCourante.getNoArticle()) {
+				if (rs.getInt("noArticle") != enchereCourante.getNoArticle()) {
 					enchereCourante = enchereBuilder(rs);
 					listeEnchere.add(enchereCourante);
 				}
