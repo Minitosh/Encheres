@@ -24,19 +24,21 @@ import encheres.bo.Enchere;
 public class ServletMainPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String MAIN_PAGE = "/WEB-INF/jsp/accueil.jsp";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletMainPage() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletMainPage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		try {
@@ -99,19 +101,23 @@ public class ServletMainPage extends HttpServlet {
 			
 			listeCategorie = categorieManager.selectionnerToutesLesCategories();
 			
+
 			request.setAttribute("listeCategorie", listeCategorie);
 			request.setAttribute("listeArticleVendu", listeArticleVendu);
 			request.setAttribute("listeEnchere", listeEnchere);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		this.getServletContext().getRequestDispatcher( MAIN_PAGE ).forward( request, response );
+		this.getServletContext().getRequestDispatcher(MAIN_PAGE).forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
 		doGet(request, response);

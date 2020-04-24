@@ -52,3 +52,26 @@ function checkValidity(element, nbError){
 	}
 	return nbError;
 }
+
+function uploadNewSaleImg(input) {
+	
+	var imgToUpdate = document.getElementById("imgNewSaleUpdate");
+	var img = document.getElementById("imgNewSale");
+	
+	img.setAttribute("value", imgToUpdate.value);
+	
+	var reader = new FileReader();
+	
+	 if (input.files && input.files[0]) {
+         var reader = new FileReader();
+
+         reader.onload = function (e) {
+             $('#imgNewSale')
+                 .attr('src', e.target.result)
+                 .width(150)
+                 .height(200);
+         };
+
+         reader.readAsDataURL(input.files[0]);
+     }
+}

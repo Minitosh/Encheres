@@ -101,16 +101,20 @@
 			  				UtilisateurManager utilisateurManager = new UtilisateurManager();
 			  				CategorieManager categorieManager = new CategorieManager();
 				  			ArticleVendu a = articleVenduManager.selectionnerArticleVenduParNoArticleVendu(e.getNoArticle());
-				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(e.getNoUtilisateur());
+				  			Utilisateur u = utilisateurManager.selectionnerUtilisateurParNo(a.getNoUtilisateur());
 				  			Categorie c = categorieManager.selectionnerCategorieParNo(a.getNoCategorie());
-				  			%>
-			  					<div class="enchere" id="${a.getNoArticle()}" onclick="">
-				  					<h5><strong><%=a.getNomArticle()%></strong></h5>
-				  					<p class="enchere-prix"><%=a.getMiseAPrix()%> crédits</p>
+				  			%>	
+				  				<form id="enchereForm<%=a.getNoArticle()%>"
+										action="Enchere" method="POST">
+			  					<div class="enchere" id="<%=a.getNoArticle()%>" onclick="document.getElementById('enchereForm<%=a.getNoArticle()%>').submit();">
+				  					<h5 ><strong><%=a.getNomArticle()%></strong></h5>
+				  					<p class="enchere-prix"><%=a.getPrixVente()%> crédits</p>
 				  					<p class="enchere-categorie"><%=c.getLibelle()%></p>
 				  					<p>Fin de l'enchère : <%=a.getDateFinEncheres()%></p>
 				  					<p>Vendeur : <strong><%=u.getPseudo()%></strong></p>
+				  					<input type="hidden" id="idArticle" name="idArticle" value="<%=a.getNoArticle()%>">
 			  					</div>
+			  					</form>
 				  			<%
 				  		}	
 			  		}
