@@ -19,6 +19,10 @@ body {
 	justify-content: flex-end;
 }
 
+.login-section a{
+	color: white;
+}
+
 .user-image {
 	height: 30px;
     width: 30px;
